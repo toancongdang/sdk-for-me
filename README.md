@@ -1,3 +1,4 @@
+<body bgcolor="red">
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -13,12 +14,14 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+![The San Juan Mountains are beautiful!](/assets/logo_momo.png "San Juan Mountains")
+
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://developers.momo.vn/#/docs/aiov2/">
-    <img src="https://img.mservice.io/momo_app_v2/new_version/img/appx_icon/logo_momo.png" alt="Logo" width="80" height="80">
+    <img src="assets/logo_momo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">SDK MOMO FOR ME</h3>
@@ -178,36 +181,34 @@ sẽ không xử lý những trường hợp KEY Production bị phát tán ra n
 | --- | ----------- |
 | partnerCode | MOMONPMB20210629|
 | partnerName | Tên doanh nghiệp SDK4ME|
-| accessKey | <details><summary>CLICK ME</summary>Q2XhhSdgpKUlQ4Ky</details>|
-| secretKey | <details><summary>CLICK ME</summary>k6B53GQKSjktZGJBK2MyrDa7w9S6RyCf</details>|
-| userwame | <details><summary>CLICK ME</summary>sdk_4_me</details> |
-| password | <details><summary>CLICK ME</summary>sdk_4_me!</details> |
-| API ENDPOINT v1 | https://test-payment.momo.vn/gw_payment/transactionProcessor |
-| API ENDPOINT v2 (Recommend)| https://test-payment.momo.vn/v2/gateway/api/create |
+| accessKey | Q2XhhSdgpKUlQ4Ky|
+| secretKey | k6B53GQKSjktZGJBK2MyrDa7w9S6RyCf|
+| userwame | sdk_4_me |
+| password | sdk_4_me! |
 </p>
 </details>
 
 # V. Call Api
 ## 1. Create Transaction (Lấy phương thức thanh toán [link](https://developers.momo.vn/#/docs/aiov2/?id=l%e1%ba%a5y-ph%c6%b0%c6%a1ng-th%e1%bb%a9c-thanh-to%c3%a1n))
->POST /v2/gateway/api/create
+>POST <span style="color:orange">/v2/gateway/api/create</span>
 
 * HTTP Request
 
 |Attribute	|Type	|Required	|Description|
 |---|---|---|---|
-|partnerCode	|String|	√|	<a href="# IV. Create Account">Thông tin tích hợp</a> |
+|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
 |partnerName	|String|	|	Tên đối tác|
 |storeId	|String|		|Thông tin cửa hàng|
 |requestId	|String|	√|	Định danh mỗi yêu cầu|
 |amount	|Long|	√|	Số tiền cần thanh toán. tối thiểu 1.000 VND tối đa 20.000.000 VND. Tiền tệ: VND|
-|orderId	|String|	√|	Mã đơn hàng thanh toán của đối tác|
+|orderId	|String|	√|	Mã đơn hàng thanh toán của đối tác (duy nhất không trùng lập)|
 |orderInfo	|String|	√|	Thông tin đơn hàng|
 |redirectUrl	|String|	√|	Một URL của đối tác. URL này được sử dụng để chuyển trang (redirect) từ MoMo về trang mua hàng của đối tác sau khi khách hàng thanh toán. Hỗ trợ: AppLink và WebLink|
 |ipnUrl	|String|	√|	API của đối tác. Được MoMo sử dụng để gửi kết quả thanh toán theo phương thức IPN (server-to-server)|
-|requestType	|String|	√|	captureWallet|
-|extraData	|String|	√|	Giá trị mặc định là trống "", Encode base64 theo định dạng Json: {"key": "value"}. Ví dụ với dữ liệu: {"username": "momo"} thì data của extraData là eyJ1c2VybmFtZSI6ICJtb21vIn0=|
+|requestType	|String|	√|	<span style="color:orange">captureWallet</span>|
+|extraData	|String|	√|	Mặc định là trống "", Encode base64 theo định dạng Json: {"key":"value"}. VD với dữ liệu: {"username": "SDK4ME"} thì data của extraData là eyJ1c2VybmFtZSI6ICJTREs0TUUifQ==|
 |lang	|String|	√|	Ngôn ngữ của message được trả về (vi hoặc en)|
-|signature	|String|	√|	Chữ ký. Sử dụng thuật toán Hmac_SHA256 với data theo định dạng được sort từ a-z |
+|signature	|String|	√|	Chữ ký. Sử dụng thuật toán Hmac_SHA256 với các key-value được sắp xếp theo thứ tự A-Z |
 
 >signature = HMAC_SHA256(accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType,secretKey)
 <details><summary>SAMPLE</summary>
@@ -254,8 +255,9 @@ Response Body
 
 
 
-
+=======================================================================
 This is an example of how to list things you need to use the software and how to install them.
+=======================================================================
 * npm
   ```sh
   npm install npm@latest -g
@@ -369,3 +371,4 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 | --- | ----------- |
 | Header | Title |
 | Paragraph | Text |
+</body>
