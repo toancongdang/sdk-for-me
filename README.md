@@ -1,4 +1,3 @@
-<body bgcolor="red">
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -14,8 +13,6 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-![The San Juan Mountains are beautiful!](/assets/logo_momo.png "San Juan Mountains")
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -42,31 +39,55 @@
 
 
 
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Mục lục</summary>
-  <ol>
-    <li>
-      <a href="#i-gi%E1%BB%9Bi-thi%E1%BB%87u">Giới thiệu</a>
-      <ul>
-        <li><a href="#built-with">Mục tiêu</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
-  </ol>
-</details>
+[comment]: <> (<!-- TABLE OF CONTENTS -->)
+
+[comment]: <> (<details open="open">)
+
+[comment]: <> (  <summary>Mục lục</summary>)
+
+[comment]: <> (  <ol>)
+
+[comment]: <> (    <li>)
+
+[comment]: <> (      <a href="#i-gi%E1%BB%9Bi-thi%E1%BB%87u">Giới thiệu</a>)
+
+[comment]: <> (      <ul>)
+
+[comment]: <> (        <li><a href="#built-with">Mục tiêu</a></li>)
+
+[comment]: <> (      </ul>)
+
+[comment]: <> (    </li>)
+
+[comment]: <> (    <li>)
+
+[comment]: <> (      <a href="#getting-started">Getting Started</a>)
+
+[comment]: <> (      <ul>)
+
+[comment]: <> (        <li><a href="#prerequisites">Prerequisites</a></li>)
+
+[comment]: <> (        <li><a href="#installation">Installation</a></li>)
+
+[comment]: <> (      </ul>)
+
+[comment]: <> (    </li>)
+
+[comment]: <> (    <li><a href="#usage">Usage</a></li>)
+
+[comment]: <> (    <li><a href="#roadmap">Roadmap</a></li>)
+
+[comment]: <> (    <li><a href="#contributing">Contributing</a></li>)
+
+[comment]: <> (    <li><a href="#license">License</a></li>)
+
+[comment]: <> (    <li><a href="#contact">Contact</a></li>)
+
+[comment]: <> (    <li><a href="#acknowledgements">Acknowledgements</a></li>)
+
+[comment]: <> (  </ol>)
+
+[comment]: <> (</details>)
 
 
 
@@ -105,16 +126,12 @@ Nhầm hỗ trợ các đối tác tích hợp các giải pháp thanh toán c�
 ## Sơ đồ xử lý
 Sơ đồ thanh toán đơn hàng trên website desktop/mobile
 <p align="left">
-  <a href="https://developers.momo.vn/#/docs/aiov2/?id=s%c6%a1-%c4%91%e1%bb%93-x%e1%bb%ad-l%c3%bd">
-    <img src="https://developers.momo.vn/images/payment-flow.jpg" alt="flow" width="100%">
-  </a>
+    <img src="assets/flow1.jpeg" alt="flow" width="100%">
 </p>
 
 Thanh toán trên Smart Tivi
 <p align="left">
-  <a href="https://developers.momo.vn/#/docs/aiov2/?id=s%c6%a1-%c4%91%e1%bb%93-x%e1%bb%ad-l%c3%bd">
-    <img src="https://s3.amazonaws.com/heroku-jinzdev/payment-smart-flow.jpg" alt="flow" width="100%">
-  </a>
+    <img src="assets/flow1.jpeg" alt="flow" width="100%">
 </p>
 
 ## Mô hình thanh toán
@@ -188,6 +205,22 @@ sẽ không xử lý những trường hợp KEY Production bị phát tán ra n
 </p>
 </details>
 
+POST MAIN Sample
+<a href="assets/SDK4Me.postman_collection.json"><strong>Tài liệu gốc »</strong></a>
+
+
+<details><summary><span style="color:orange">AppLink và WebLink</span></summary>
+<p>
+Tìm hiểu thêm về AppLink
+Android: https://developer.android.com/training/app-links
+<br>
+IOS: https://developer.apple.com/documentation/uikit/core_app/..
+</p>
+</details>
+
+
+
+
 # V. Call Api
 ## 1. Create Transaction (Lấy phương thức thanh toán [link](https://developers.momo.vn/#/docs/aiov2/?id=l%e1%ba%a5y-ph%c6%b0%c6%a1ng-th%e1%bb%a9c-thanh-to%c3%a1n))
 >POST <span style="color:orange">/v2/gateway/api/create</span>
@@ -202,16 +235,20 @@ sẽ không xử lý những trường hợp KEY Production bị phát tán ra n
 |requestId	|String|	√|	Định danh mỗi yêu cầu|
 |amount	|Long|	√|	Số tiền cần thanh toán. tối thiểu 1.000 VND tối đa 20.000.000 VND. Tiền tệ: VND|
 |orderId	|String|	√|	Mã đơn hàng thanh toán của đối tác (duy nhất không trùng lập)|
-|orderInfo	|String|	√|	Thông tin đơn hàng|
-|redirectUrl	|String|	√|	Một URL của đối tác. URL này được sử dụng để chuyển trang (redirect) từ MoMo về trang mua hàng của đối tác sau khi khách hàng thanh toán. Hỗ trợ: AppLink và WebLink|
+|orderInfo	|String|	√|	Thông tin đơn hàng mô tả|
+|redirectUrl	|String|	√|	Một URL của đối tác. URL này được sử dụng để chuyển trang (redirect) từ MoMo về trang mua hàng của đối tác sau khi khách hàng thanh toán. Hỗ trợ: <details><summary><span style="color:orange">AppLink và WebLink</span></summary><p>Tìm hiểu thêm về AppLink<br>Android: https://developer.android.com/training/app-links <br>IOS: https://developer.apple.com/documentation/uikit/core_app/.. </p></details></span>|
 |ipnUrl	|String|	√|	API của đối tác. Được MoMo sử dụng để gửi kết quả thanh toán theo phương thức IPN (server-to-server)|
 |requestType	|String|	√|	<span style="color:orange">captureWallet</span>|
 |extraData	|String|	√|	Mặc định là trống "", Encode base64 theo định dạng Json: {"key":"value"}. VD với dữ liệu: {"username": "SDK4ME"} thì data của extraData là eyJ1c2VybmFtZSI6ICJTREs0TUUifQ==|
 |lang	|String|	√|	Ngôn ngữ của message được trả về (vi hoặc en)|
-|signature	|String|	√|	Chữ ký. Sử dụng thuật toán Hmac_SHA256 với các key-value được sắp xếp theo thứ tự A-Z |
+|signature	|String|	√|	Chữ ký. Sử dụng thuật toán Hmac_SHA256 với các key-value được <span style="color:orange">sắp xếp theo format A-Z</span> |
 
->signature = HMAC_SHA256(accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType,secretKey)
-<details><summary>SAMPLE</summary>
+>signature = <span style="color:orange">HMAC_SHA256</span>(accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType, <span style="color:orange">secretKey</span>)
+
+DATA MẪU
+<br>
+https://test-payment.momo.vn/v2/gateway/api/create
+<br>
 Request Body
 
 ```json
@@ -236,7 +273,7 @@ Response Body
 {
   "partnerCode": "MOMONPMB20210629",
   "requestId": "requestId_1624943052612",
-  "orderId": "orderId_1624943052612",
+  "orderId": "MOMONPMB20210629_1",
   "amount": 1100,
   "responseTime": 1624945082867,
   "message": "Thành công",
@@ -247,7 +284,6 @@ Response Body
   "deeplinkMiniApp": "momo://?action=payWithAppToken&amount=1100&cashInId=&cashInIdPay=&createdAt=1624945082867&deeplinkCallback=&description=DANG_CONG_TOAN_TEST&extra=&extraData=&extras=&gatewayMerchantCode=MOMONPMB20210629&gatewaySessionId=TU9NT05QTUIyMDIxMDYyOXwxNjI0OTQ1MDgyMTU3TS5PLk0uTw==&gatewayVersion=3.0&giftIds=&isScanQR=false&language=vi&merchantcode=MOMONPMB20210629&merchantname=T%C3%AAn+doanh+nghi%E1%BB%87p+SDK4ME&merchantnamelabel=Nh%C3%A0+cung+c%E1%BA%A5p&orderId=1624945082157M.O.M.O&orderLabel=M%C3%A3+%C4%91%C6%A1n+h%C3%A0ng&partnerCode=MOMONPMB20210629&partnerName=T%C3%AAn+doanh+nghi%E1%BB%87p+SDK4ME&prepaidIds=&requestId=1624945082157M.O.M.O&requestType=payment&serviceType=miniapp&signature=d0cd686b15471f7cb3eed3bf8ab52941ebcbbf6c8a932b1dfc13b77640516a1a&storeId=MOMONPMB20210629&storeName=T%C3%AAn+doanh+nghi%E1%BB%87p+SDK4ME&type=&urlSubmitToken=https%3A%2F%2Fmomo.vn"
 }
 ```
-</details>
 
 
 
@@ -255,120 +291,172 @@ Response Body
 
 
 
-=======================================================================
-This is an example of how to list things you need to use the software and how to install them.
-=======================================================================
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+[comment]: <> (* npm)
 
-### Installation
+[comment]: <> (  ```sh)
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
-   ```
+[comment]: <> (  npm install npm@latest -g)
 
+[comment]: <> (  ```)
 
+[comment]: <> (### Installation)
 
-<!-- USAGE EXAMPLES -->
-## Usage
+[comment]: <> (1. Get a free API Key at [https://example.com]&#40;https://example.com&#41;)
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+[comment]: <> (2. Clone the repo)
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+[comment]: <> (   ```sh)
 
+[comment]: <> (   git clone https://github.com/your_username_/Project-Name.git)
 
+[comment]: <> (   ```)
 
-<!-- ROADMAP -->
-## Roadmap
+[comment]: <> (3. Install NPM packages)
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
+[comment]: <> (   ```sh)
+
+[comment]: <> (   npm install)
+
+[comment]: <> (   ```)
+
+[comment]: <> (4. Enter your API in `config.js`)
+
+[comment]: <> (   ```JS)
+
+[comment]: <> (   const API_KEY = 'ENTER YOUR API';)
+
+[comment]: <> (   ```)
 
 
 
-<!-- CONTRIBUTING -->
-## Contributing
+[comment]: <> (<!-- USAGE EXAMPLES -->)
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+[comment]: <> (## Usage)
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+[comment]: <> (Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.)
+
+[comment]: <> (_For more examples, please refer to the [Documentation]&#40;https://example.com&#41;_)
 
 
 
-<!-- LICENSE -->
-## License
+[comment]: <> (<!-- ROADMAP -->)
 
-Distributed under the MIT License. See `LICENSE` for more information.
+[comment]: <> (## Roadmap)
 
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+[comment]: <> (See the [open issues]&#40;https://github.com/othneildrew/Best-README-Template/issues&#41; for a list of proposed features &#40;and known issues&#41;.)
 
 
 
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
+[comment]: <> (<!-- CONTRIBUTING -->)
+
+[comment]: <> (## Contributing)
+
+[comment]: <> (Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.)
+
+[comment]: <> (1. Fork the Project)
+
+[comment]: <> (2. Create your Feature Branch &#40;`git checkout -b feature/AmazingFeature`&#41;)
+
+[comment]: <> (3. Commit your Changes &#40;`git commit -m 'Add some AmazingFeature'`&#41;)
+
+[comment]: <> (4. Push to the Branch &#40;`git push origin feature/AmazingFeature`&#41;)
+
+[comment]: <> (5. Open a Pull Request)
+
+
+
+[comment]: <> (<!-- LICENSE -->)
+
+[comment]: <> (## License)
+
+[comment]: <> (Distributed under the MIT License. See `LICENSE` for more information.)
+
+
+
+[comment]: <> (<!-- CONTACT -->)
+
+[comment]: <> (## Contact)
+
+[comment]: <> (Your Name - [@your_twitter]&#40;https://twitter.com/your_username&#41; - email@example.com)
+
+[comment]: <> (Project Link: [https://github.com/your_username/repo_name]&#40;https://github.com/your_username/repo_name&#41;)
+
+
+
+[comment]: <> (<!-- ACKNOWLEDGEMENTS -->)
+
+[comment]: <> (## Acknowledgements)
+
+[comment]: <> (* [GitHub Emoji Cheat Sheet]&#40;https://www.webpagefx.com/tools/emoji-cheat-sheet&#41;)
+
+[comment]: <> (* [Img Shields]&#40;https://shields.io&#41;)
+
+[comment]: <> (* [Choose an Open Source License]&#40;https://choosealicense.com&#41;)
+
+[comment]: <> (* [GitHub Pages]&#40;https://pages.github.com&#41;)
+
+[comment]: <> (* [Animate.css]&#40;https://daneden.github.io/animate.css&#41;)
+
+[comment]: <> (* [Loaders.css]&#40;https://connoratherton.com/loaders&#41;)
+
+[comment]: <> (* [Slick Carousel]&#40;https://kenwheeler.github.io/slick&#41;)
+
+[comment]: <> (* [Smooth Scroll]&#40;https://github.com/cferdinandi/smooth-scroll&#41;)
+
+[comment]: <> (* [Sticky Kit]&#40;http://leafo.net/sticky-kit&#41;)
+
+[comment]: <> (* [JVectorMap]&#40;http://jvectormap.com&#41;)
+
+[comment]: <> (* [Font Awesome]&#40;https://fontawesome.com&#41;)
 
 
 
 
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[comment]: <> (<!-- MARKDOWN LINKS & IMAGES -->)
+
+[comment]: <> (<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->)
+
+[comment]: <> ([contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge)
+
+[comment]: <> ([contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors)
+
+[comment]: <> ([forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge)
+
+[comment]: <> ([forks-url]: https://github.com/othneildrew/Best-README-Template/network/members)
+
+[comment]: <> ([stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge)
+
+[comment]: <> ([stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers)
+
+[comment]: <> ([issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge)
+
+[comment]: <> ([issues-url]: https://github.com/othneildrew/Best-README-Template/issues)
+
+[comment]: <> ([license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge)
+
+[comment]: <> ([license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt)
+
+[comment]: <> ([linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555)
+
+[comment]: <> ([linkedin-url]: https://linkedin.com/in/othneildrew)
+
+[comment]: <> ([product-screenshot]: images/screenshot.png)
 
 
-| Syntax      | Description | Test Text     |
-| :---        |    :----:   |          ---: |
-| Header      | Title       | Here's this   |
-| Paragraph   | Text        | And more      |
+[comment]: <> (| Syntax      | Description | Test Text     |)
+
+[comment]: <> (| :---        |    :----:   |          ---: |)
+
+[comment]: <> (| Header      | Title       | Here's this   |)
+
+[comment]: <> (| Paragraph   | Text        | And more      |)
 
 
-| Syntax | Description |
-| --- | ----------- |
-| Header | Title |
-| Paragraph | Text |
-</body>
+[comment]: <> (| Syntax | Description |)
+
+[comment]: <> (| --- | ----------- |)
+
+[comment]: <> (| Header | Title |)
+
+[comment]: <> (| Paragraph | Text |)

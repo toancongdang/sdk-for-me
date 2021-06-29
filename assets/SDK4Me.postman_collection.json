@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "824f45be-6447-48f0-af0f-aef81e5ade6f",
+		"name": "SDK For Me",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Transaction 2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Nạp các giá trị được input trong folder SDK For Me",
+							"var partnerCode = pm.variables.get('partnerCode');",
+							"var partnerName = pm.variables.get('partnerName');",
+							"var accessKey = pm.variables.get('accessKey');",
+							"var secretKey = pm.variables.get('secretKey');",
+							"",
+							"var orderId = new Date().getTime()+\"M.O.M.O\";//Cần tạo mã unique không được trùng lập",
+							"var extraData = JSON.stringify({\"Note\":[\"Test\",\"Data\"]});",
+							"//Base64 extraData",
+							"extraData = btoa(extraData);",
+							"",
+							"var request = {",
+							"    \"partnerCode\": partnerCode,",
+							"    \"partnerName\": partnerName,",
+							"    \"storeId\": partnerCode,",
+							"    \"requestId\": orderId,",
+							"    \"amount\": 1100,",
+							"    \"orderId\": orderId,",
+							"    \"orderInfo\": \"DANG_CONG_TOAN_TEST\",",
+							"    \"requestType\": \"captureWallet\",",
+							"    \"redirectUrl\": \"https://webhook.site/f02fbc02-73be-4448-a57e-92940369f331\",",
+							"    \"ipnUrl\": \"https://test-payment.momo.vn/demo/#/payment-result\",",
+							"    \"extraData\": extraData,",
+							"    \"lang\":\"vi\"",
+							"}",
+							"// HMAC_SHA256(accessKey=$accessKey&amount=$amount&extraData=",
+							"// $extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=",
+							"// $orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl",
+							"// &requestId=$requestId&requestType=$requestType,secretKey)",
+							"",
+							"var planText = 'accessKey='+accessKey+",
+							"'&amount='+request.amount+",
+							"'&extraData='+request.extraData+",
+							"'&ipnUrl='+request.ipnUrl+",
+							"'&orderId='+request.orderId+",
+							"'&orderInfo='+request.orderInfo+",
+							"'&partnerCode='+request.partnerCode+",
+							"'&redirectUrl='+request.redirectUrl+",
+							"'&requestId='+request.requestId+",
+							"'&requestType='+request.requestType + \"\";",
+							"",
+							"pm.environment.set(\"partnerCode\", request.partnerCode);",
+							"pm.environment.set(\"partnerName\", request.partnerName);",
+							"pm.environment.set(\"storeId\", request.storeId);",
+							"pm.environment.set(\"requestId\", request.requestId);",
+							"pm.environment.set(\"amount\", request.amount);",
+							"pm.environment.set(\"orderId\", request.orderId);",
+							"pm.environment.set(\"orderInfo\", request.orderInfo);",
+							"pm.environment.set(\"redirectUrl\", request.redirectUrl);",
+							"pm.environment.set(\"ipnUrl\", request.ipnUrl);",
+							"pm.environment.set(\"requestType\", request.requestType);",
+							"pm.environment.set(\"extraData\", request.extraData);",
+							"pm.environment.set(\"lang\", request.lang);",
+							"pm.environment.set(\"signature\", CryptoJS.HmacSHA256(planText, secretKey).toString(CryptoJS.digest));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"partnerCode\": \"{{partnerCode}}\",\n    \"partnerName\": \"{{partnerName}}\",\n    \"storeId\": \"{{storeId}}\",\n    \"requestId\": \"{{requestId}}\",\n    \"amount\": {{amount}},\n    \"orderId\": \"{{orderId}}\",\n    \"orderInfo\": \"{{orderInfo}}\",\n    \"redirectUrl\": \"{{redirectUrl}}\",\n    \"ipnUrl\": \"{{ipnUrl}}\",\n    \"requestType\": \"{{requestType}}\",\n    \"extraData\": \"{{extraData}}\",\n    \"lang\": \"{{lang}}\",\n    \"signature\": \"{{signature}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test-payment.momo.vn/v2/gateway/api/create",
+					"protocol": "https",
+					"host": [
+						"test-payment",
+						"momo",
+						"vn"
+					],
+					"path": [
+						"v2",
+						"gateway",
+						"api",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Status",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"partnerCode\": \"123456\",\n  \"accessKey\": \"F8BBA842ECF85\",\n  \"requestId\": \"1527246504579\",\n  \"orderId\": \"1527246478428\",\n  \"requestType\": \"transactionStatus\",\n  \"signature\": \"13be80957a5ee32107198920fa26aa85a4ca238a29f46e292e8c33dd9186142a\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test-payment.momo.vn/gw_payment/transactionProcessor",
+					"protocol": "https",
+					"host": [
+						"test-payment",
+						"momo",
+						"vn"
+					],
+					"path": [
+						"gw_payment",
+						"transactionProcessor"
+					]
+				},
+				"description": "Kiểm tra orderId đã được thanh toán rồi hay chưa"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "partnerCode",
+			"value": "MOMOIQA420180417"
+		},
+		{
+			"key": "partnerName",
+			"value": ""
+		},
+		{
+			"key": "accessKey",
+			"value": "Q8gbQHeDesB2Xs0t"
+		},
+		{
+			"key": "secretKey",
+			"value": "PPuDXq1KowPT1ftR8DvlQTHhC03aul17"
+		}
+	]
+}
