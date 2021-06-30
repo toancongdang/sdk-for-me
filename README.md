@@ -204,25 +204,18 @@ sẽ không xử lý những trường hợp KEY Production bị phát tán ra n
 | password | sdk_4_me! |
 </p>
 </details>
-
-POST MAIN Sample
-<a href="assets/SDK4Me.postman_collection.json"><strong>Tài liệu gốc »</strong></a>
-
-
-<details><summary><span style="color:orange">AppLink và WebLink</span></summary>
-<p>
-Tìm hiểu thêm về AppLink
-Android: https://developer.android.com/training/app-links
 <br>
-IOS: https://developer.apple.com/documentation/uikit/core_app/..
+<details><summary>CLICK ME !!! POSTMAN import »</summary>
+<p align="left">
+https://www.getpostman.com/collections/575b63ae886fcc5c694a
+<br>
+<br>
+<img src="assets/postman.png.jpeg" alt="flow" width="100%">
 </p>
 </details>
 
-
-
-
 # V. Call Api
-## 1. Create Transaction (Lấy phương thức thanh toán [link](https://developers.momo.vn/#/docs/aiov2/?id=l%e1%ba%a5y-ph%c6%b0%c6%a1ng-th%e1%bb%a9c-thanh-to%c3%a1n))
+## 1. Create Transaction (Lấy phương thức thanh toán) [docs link](https://developers.momo.vn/#/docs/aiov2/?id=l%e1%ba%a5y-ph%c6%b0%c6%a1ng-th%e1%bb%a9c-thanh-to%c3%a1n)
 >POST <span style="color:orange">/v2/gateway/api/create</span>
 
 * HTTP Request
@@ -238,14 +231,34 @@ IOS: https://developer.apple.com/documentation/uikit/core_app/..
 |orderInfo	|String|	√|	Thông tin đơn hàng mô tả|
 |redirectUrl	|String|	√|	Một URL của đối tác. URL này được sử dụng để chuyển trang (redirect) từ MoMo về trang mua hàng của đối tác sau khi khách hàng thanh toán. Hỗ trợ: <details><summary><span style="color:orange">AppLink và WebLink</span></summary><p>Tìm hiểu thêm về AppLink<br>Android: https://developer.android.com/training/app-links <br>IOS: https://developer.apple.com/documentation/uikit/core_app/.. </p></details></span>|
 |ipnUrl	|String|	√|	API của đối tác. Được MoMo sử dụng để gửi kết quả thanh toán theo phương thức IPN (server-to-server)|
-|requestType	|String|	√|	<span style="color:orange">captureWallet</span>|
+|requestType	|String|	√|	<span style="color:red">captureWallet</span>|
 |extraData	|String|	√|	Mặc định là trống "", Encode base64 theo định dạng Json: {"key":"value"}. VD với dữ liệu: {"username": "SDK4ME"} thì data của extraData là eyJ1c2VybmFtZSI6ICJTREs0TUUifQ==|
 |lang	|String|	√|	Ngôn ngữ của message được trả về (vi hoặc en)|
-|signature	|String|	√|	Chữ ký. Sử dụng thuật toán Hmac_SHA256 với các key-value được <span style="color:orange">sắp xếp theo format A-Z</span> |
+|signature	|String|	√|	Chữ ký. Sử dụng thuật toán Hmac_SHA256 với các key-value được <font color='orange'>sắp xếp theo format A-Z</font> |
 
 >signature = <span style="color:orange">HMAC_SHA256</span>(accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType, <span style="color:orange">secretKey</span>)
 
-DATA MẪU
+* HTTP Response
+
+|Attribute	|Type	|Required	|Description|
+|---|---|---|---|
+|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
+|requestId	|String|	√|	Giống với yêu cầu ban đầu|
+|orderId	|String|	√	|Mã đơn hàng của đối tác|
+|amount	|Long|	√|	Giống với số tiền yêu cầu ban đầu|
+|responseTime	|Long|	√|	Thời gian trả kết quả thanh toán về đối tác. Vd: 1625030045458|
+|message	|String|	√|	Mô tả lỗi (tiếng Anh hoặc tiếng Việt dựa vào biến "land"|
+|resultCode	|int|	√|	Mã lỗi >>|
+|payUrl	|String|	√|	URL để chuyển từ trang mua hàng của đối tác sang trang thanh toán của MoMo|
+|deeplink	|String|	|URL để mở ứng dụng trực tiếp MoMo (Khách hàng phải cài đặt ứng dụng MoMo trước) và trang xác nhận thanh toán.|
+|qrCodeUrl	|String|	|	Dữ liệu để tạo mã QR nếu bạn muốn khách hàng quét mã QR trực tiếp trên trang mua hàng hoặc in mã lên hoá đơn.<br>Lưu ý: Đây không phải URL chứa hình ảnh của mã QR, bạn cần sử dụng thư viện ngoài để tạo mã QR.|
+|deeplinkWebInApp	|String|	|	URL để mở màn hình xác nhận thanh toán của ứng dụng MoMo. Áp dụng khi website của đối tác nhúng vào trong ứng dụng MoMo|
+|deeplinkMiniApp	|String|	|	URL mở màn hình xác nhận thanh toán của ứng dụng MoMo. Áp dụng khi đối tác sử dụng mini app nhúng vào trong ứng dụng MoMo|
+
+CHÚ Ý !!!!
+>Bạn phải yêu cầu quyền truy cập để sử dụng những trường qrCodeUrl, deeplink, deeplinkWebInApp, deeplinkMiniApp.
+
+DATA Example
 <br>
 https://test-payment.momo.vn/v2/gateway/api/create
 <br>
@@ -284,6 +297,8 @@ Response Body
   "deeplinkMiniApp": "momo://?action=payWithAppToken&amount=1100&cashInId=&cashInIdPay=&createdAt=1624945082867&deeplinkCallback=&description=DANG_CONG_TOAN_TEST&extra=&extraData=&extras=&gatewayMerchantCode=MOMONPMB20210629&gatewaySessionId=TU9NT05QTUIyMDIxMDYyOXwxNjI0OTQ1MDgyMTU3TS5PLk0uTw==&gatewayVersion=3.0&giftIds=&isScanQR=false&language=vi&merchantcode=MOMONPMB20210629&merchantname=T%C3%AAn+doanh+nghi%E1%BB%87p+SDK4ME&merchantnamelabel=Nh%C3%A0+cung+c%E1%BA%A5p&orderId=1624945082157M.O.M.O&orderLabel=M%C3%A3+%C4%91%C6%A1n+h%C3%A0ng&partnerCode=MOMONPMB20210629&partnerName=T%C3%AAn+doanh+nghi%E1%BB%87p+SDK4ME&prepaidIds=&requestId=1624945082157M.O.M.O&requestType=payment&serviceType=miniapp&signature=d0cd686b15471f7cb3eed3bf8ab52941ebcbbf6c8a932b1dfc13b77640516a1a&storeId=MOMONPMB20210629&storeName=T%C3%AAn+doanh+nghi%E1%BB%87p+SDK4ME&type=&urlSubmitToken=https%3A%2F%2Fmomo.vn"
 }
 ```
+
+## 1. Create Transaction (Lấy phương thức thanh toán) [docs link](https://developers.momo.vn/#/docs/aiov2/?id=l%e1%ba%a5y-ph%c6%b0%c6%a1ng-th%e1%bb%a9c-thanh-to%c3%a1n)
 
 
 
