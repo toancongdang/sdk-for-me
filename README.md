@@ -210,7 +210,7 @@ sẽ không xử lý những trường hợp KEY Production bị phát tán ra n
 https://www.getpostman.com/collections/575b63ae886fcc5c694a
 <br>
 <br>
-<img src="assets/postman.png.jpeg" alt="flow" width="100%">
+<img src="assets/postman.png" alt="flow" width="100%">
 </p>
 </details>
 
