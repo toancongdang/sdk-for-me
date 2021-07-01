@@ -209,6 +209,7 @@ sẽ không xử lý những trường hợp KEY Production bị phát tán ra n
 <p align="left">
 https://www.getpostman.com/collections/575b63ae886fcc5c694a
 <br>
+Import postman theo hình minh họa bên dưới
 <br>
 <img src="assets/postman.png" alt="flow" width="50%">
 </p>
@@ -234,7 +235,7 @@ https://www.getpostman.com/collections/575b63ae886fcc5c694a
 |requestType	|String|	√|	<span style="color:red">captureWallet</span>|
 |extraData	|String|	√|	Mặc định là trống "", Encode base64 theo định dạng Json: {"key":"value"}. VD với dữ liệu: {"username": "SDK4ME"} thì data của extraData là eyJ1c2VybmFtZSI6ICJTREs0TUUifQ==|
 |lang	|String|	√|	Ngôn ngữ của message được trả về (vi hoặc en)|
-|signature	|String|	√|	Chữ ký. Sử dụng thuật toán Hmac_SHA256 với các key-value được <font color='orange'>sắp xếp theo format A-Z</font> |
+|signature	|String|	√|	Chữ ký. Sử dụng thuật toán Hmac_SHA256 với các key-value được *__sắp xếp theo format A-Z__* |
 
 >signature = <span style="color:orange">HMAC_SHA256</span>(accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType, <span style="color:orange">secretKey</span>)
 
@@ -252,11 +253,10 @@ https://www.getpostman.com/collections/575b63ae886fcc5c694a
 |payUrl	|String|	√|	URL để chuyển từ trang mua hàng của đối tác sang trang thanh toán của MoMo|
 |deeplink	|String|	|URL để mở ứng dụng trực tiếp MoMo (Khách hàng phải cài đặt ứng dụng MoMo trước) và trang xác nhận thanh toán.|
 |qrCodeUrl	|String|	|	Dữ liệu để tạo mã QR nếu bạn muốn khách hàng quét mã QR trực tiếp trên trang mua hàng hoặc in mã lên hoá đơn.<br>Lưu ý: Đây không phải URL chứa hình ảnh của mã QR, bạn cần sử dụng thư viện ngoài để tạo mã QR.|
-|deeplinkWebInApp	|String|	|	URL để mở màn hình xác nhận thanh toán của ứng dụng MoMo. Áp dụng khi website của đối tác nhúng vào trong ứng dụng MoMo|
 |deeplinkMiniApp	|String|	|	URL mở màn hình xác nhận thanh toán của ứng dụng MoMo. Áp dụng khi đối tác sử dụng mini app nhúng vào trong ứng dụng MoMo|
 
 CHÚ Ý !!!!
->Bạn phải yêu cầu quyền truy cập để sử dụng những trường qrCodeUrl, deeplink, deeplinkWebInApp, deeplinkMiniApp.
+>Bạn phải yêu cầu quyền truy cập để sử dụng những trường qrCodeUrl, deeplink, deeplinkMiniApp.
 
 DATA Example
 <br>
@@ -297,6 +297,23 @@ Response Body
   "deeplinkMiniApp": "momo://?action=payWithAppToken&amount=1100&cashInId=&cashInIdPay=&createdAt=1624945082867&deeplinkCallback=&description=DANG_CONG_TOAN_TEST&extra=&extraData=&extras=&gatewayMerchantCode=MOMONPMB20210629&gatewaySessionId=TU9NT05QTUIyMDIxMDYyOXwxNjI0OTQ1MDgyMTU3TS5PLk0uTw==&gatewayVersion=3.0&giftIds=&isScanQR=false&language=vi&merchantcode=MOMONPMB20210629&merchantname=T%C3%AAn+doanh+nghi%E1%BB%87p+SDK4ME&merchantnamelabel=Nh%C3%A0+cung+c%E1%BA%A5p&orderId=1624945082157M.O.M.O&orderLabel=M%C3%A3+%C4%91%C6%A1n+h%C3%A0ng&partnerCode=MOMONPMB20210629&partnerName=T%C3%AAn+doanh+nghi%E1%BB%87p+SDK4ME&prepaidIds=&requestId=1624945082157M.O.M.O&requestType=payment&serviceType=miniapp&signature=d0cd686b15471f7cb3eed3bf8ab52941ebcbbf6c8a932b1dfc13b77640516a1a&storeId=MOMONPMB20210629&storeName=T%C3%AAn+doanh+nghi%E1%BB%87p+SDK4ME&type=&urlSubmitToken=https%3A%2F%2Fmomo.vn"
 }
 ```
+
+<h2 id="custom-id">2. Payment</h2>
+>Ở tại bước thanh toán trên nền tảng **⚠️WEB** của đối tác Desktop/Mobile.<br>
+>Phía đối tác gọi 1 trong 4 phương thức sau của MoMo
+><br>⚠️Lưu ý: Các phương thức *__qrCodeUrl, deeplink, deeplinkMiniApp__* phải liên hệ bộ phận kinh doanh để active
+>
+> 
+> ><details><summary>Phương thức 1: payUrl (thông dụng và phổ biến nhất)</summary><p align="left"><img src="assets/postman.png" alt="flow" width="50%"></details>
+>
+> ><details><summary>Phương thức 2: qrCodeUrl</summary><p align="left"><img src="assets/postman.png" alt="flow" width="50%"></details>
+>
+>Ở tại bước thanh toán trên nền tảng **⚠️APP** của đối tác
+> ><details><summary>Phương thức 3: deeplink</summary><p align="left"><img src="assets/postman.png" alt="flow" width="50%"></details>
+>
+> ><details><summary>Phương thức 4: deeplinkMiniApp</summary><p align="left"><img src="assets/postman.png" alt="flow" width="50%"></details>
+>
+
 
 ## 1. Create Transaction (Lấy phương thức thanh toán) [docs link](https://developers.momo.vn/#/docs/aiov2/?id=l%e1%ba%a5y-ph%c6%b0%c6%a1ng-th%e1%bb%a9c-thanh-to%c3%a1n)
 
@@ -475,3 +492,17 @@ Response Body
 [comment]: <> (| Header | Title |)
 
 [comment]: <> (| Paragraph | Text |)
+
+Here's a sentence with a footnote. [^1]
+[^1]: This is the footnote.
+
+### My Great Heading {#custom-id}
+<h6 id="custom-id"></h3>
+
+
+term
+: definition
+
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
