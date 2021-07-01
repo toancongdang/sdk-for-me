@@ -255,8 +255,7 @@ Import postman theo hình minh họa bên dưới
 |qrCodeUrl	|String|	|	Dữ liệu để tạo mã QR nếu bạn muốn khách hàng quét mã QR trực tiếp trên trang mua hàng hoặc in mã lên hoá đơn.<br>Lưu ý: Đây không phải URL chứa hình ảnh của mã QR, bạn cần sử dụng thư viện ngoài để tạo mã QR.|
 |deeplinkMiniApp	|String|	|	URL mở màn hình xác nhận thanh toán của ứng dụng MoMo. Áp dụng khi đối tác sử dụng mini app nhúng vào trong ứng dụng MoMo|
 
-CHÚ Ý !!!!
->Bạn phải yêu cầu quyền truy cập để sử dụng những trường qrCodeUrl, deeplink, deeplinkMiniApp.
+>⚠️⚠️⚠️ LƯU Ý: Bạn phải yêu cầu quyền truy cập để sử dụng những trường qrCodeUrl, deeplink, deeplinkMiniApp.
 
 DATA Example
 <br>
@@ -299,20 +298,33 @@ Response Body
 ```
 
 <h2 id="custom-id">2. Payment</h2>
->Ở tại bước thanh toán trên nền tảng **⚠️WEB** của đối tác Desktop/Mobile.<br>
->Phía đối tác gọi 1 trong 4 phương thức sau của MoMo
-><br>⚠️Lưu ý: Các phương thức *__qrCodeUrl, deeplink, deeplinkMiniApp__* phải liên hệ bộ phận kinh doanh để active
->
-> 
-> ><details><summary>Phương thức 1: payUrl (thông dụng và phổ biến nhất)</summary><p align="left"><img src="assets/postman.png" alt="flow" width="50%"></details>
->
-> ><details><summary>Phương thức 2: qrCodeUrl</summary><p align="left"><img src="assets/postman.png" alt="flow" width="50%"></details>
->
+>CHỌN 1 TRONG 4 phương thức: payUrl, deeplink, qrCodeUrl, deeplinkMiniApp<br>
+>Ở tại bước thanh toán trên nền tảng ⚠️WEB của đối tác Desktop/Mobile.<br>
+<details><summary>Phương thức 1: payUrl (thông dụng và phổ biến nhất)</summary>
+Open URL payUrl để chuyển từ trang mua hàng của đối tác sang trang thanh toán của MoMo.  Mã QR sẽ hết hạn trong 5 phút (có thể thay đổi theo yêu cầu của đối tác)
+<p align="left">
+<img src="assets/solution1.png" alt="flow" width="50%">
+</p>
+</details>
+<br>
+<details><summary>Phương thức 2: qrCodeUrl</summary>
+Dữ liệu qrCodeUrl để tạo mã QR. Khách hàng quét mã QR trực tiếp trên trang mua hàng hoặc in mã lên hoá đơn. Mã QR sẽ hết hạn trong 5 phút (có thể thay đổi theo yêu cầu của đối tác)
+<p align="left">
+<img src="assets/solution2.png" alt="flow" width="50%">
+</p>
+</details>
+
 >Ở tại bước thanh toán trên nền tảng **⚠️APP** của đối tác
-> ><details><summary>Phương thức 3: deeplink</summary><p align="left"><img src="assets/postman.png" alt="flow" width="50%"></details>
->
-> ><details><summary>Phương thức 4: deeplinkMiniApp</summary><p align="left"><img src="assets/postman.png" alt="flow" width="50%"></details>
->
+<details><summary>Phương thức 3: deeplink (App-in-app, Mobile Web)</summary>
+App-in-app : App đối tác - 
+
+
+<p align="left"><img src="assets/postman.png" alt="flow" width="50%"></details>
+<br>
+<details><summary>Phương thức 4: deeplinkMiniApp (Đang cập nhật)</summary><p align="left">
+Dành cho đối tác có MiniApp nằm trong Siêu App MoMo
+</details>
+
 
 
 ## 1. Create Transaction (Lấy phương thức thanh toán) [docs link](https://developers.momo.vn/#/docs/aiov2/?id=l%e1%ba%a5y-ph%c6%b0%c6%a1ng-th%e1%bb%a9c-thanh-to%c3%a1n)
