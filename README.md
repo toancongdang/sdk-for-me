@@ -298,19 +298,22 @@ Response Body
 ```
 
 <h2 id="custom-id">2. Payment</h2>
->CHỌN 1 TRONG 4 phương thức: payUrl, deeplink, qrCodeUrl, deeplinkMiniApp<br>
->Ở tại bước thanh toán trên nền tảng ⚠️WEB của đối tác Desktop/Mobile.<br>
+
+> CHỌN 1 TRONG 4 phương thức: payUrl, deeplink, qrCodeUrl, deeplinkMiniApp<br>
+
+> Ở tại bước thanh toán trên nền tảng ⚠️WEB của đối tác Desktop/Mobile.<br>
+
 <details><summary>Phương thức 1: payUrl (thông dụng và phổ biến nhất)</summary>
 Open URL payUrl để chuyển từ trang mua hàng của đối tác sang trang thanh toán của MoMo.  Mã QR sẽ hết hạn trong 5 phút (có thể thay đổi theo yêu cầu của đối tác)
 <p align="left">
-<img src="assets/solution1.png" alt="flow" width="50%">
+<img src="assets/solution1.png" alt="flow" width="100%">
 </p>
 </details>
 <br>
 <details><summary>Phương thức 2: qrCodeUrl</summary>
 Dữ liệu qrCodeUrl để tạo mã QR. Khách hàng quét mã QR trực tiếp trên trang mua hàng hoặc in mã lên hoá đơn. Mã QR sẽ hết hạn trong 5 phút (có thể thay đổi theo yêu cầu của đối tác)
 <p align="left">
-<img src="assets/solution2.png" alt="flow" width="50%">
+<img src="assets/solution2.png" alt="flow" width="100%">
 </p>
 </details>
 
