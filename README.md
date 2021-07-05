@@ -46,10 +46,11 @@
 <details open="open"><summary>MỤC LỤC</summary>
   <ol>
     <a href="#1">I. Giới thiệu</a>
-    <br><a href="#2">II. Thông tin chung</a>
-    <br><a href="#3">III. Create Account</a>
+    <br><a href="#2">II. Thông tin chung - HTTP Info</a>
+    <br><a href="#3">III. Create Account M4B (MoMo For Business)</a>
     <br><a href="#4">IV. Call Api (Lấy phương thức thanh toán)</a>
     <ul>
+    <li><a href="#4.1">1. Create Transaction</a></li>
     <li><a href="#4.2">2. Payment</a></li>
     <li><a href="#4.3">3. MoMo return result</a></li>
     <li><a href="#4.4">4. API check transaction status</a></li>
