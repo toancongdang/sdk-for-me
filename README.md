@@ -39,60 +39,33 @@
 
 
 
-[comment]: <> (<!-- TABLE OF CONTENTS -->)
 
-[comment]: <> (<details open="open">)
 
-[comment]: <> (  <summary>Mục lục</summary>)
+<!-- TABLE OF CONTENTS -->
 
-[comment]: <> (  <ol>)
-
-[comment]: <> (    <li>)
-
-[comment]: <> (      <a href="#i-gi%E1%BB%9Bi-thi%E1%BB%87u">Giới thiệu</a>)
-
-[comment]: <> (      <ul>)
-
-[comment]: <> (        <li><a href="#built-with">Mục tiêu</a></li>)
-
-[comment]: <> (      </ul>)
-
-[comment]: <> (    </li>)
-
-[comment]: <> (    <li>)
-
-[comment]: <> (      <a href="#getting-started">Getting Started</a>)
-
-[comment]: <> (      <ul>)
-
-[comment]: <> (        <li><a href="#prerequisites">Prerequisites</a></li>)
-
-[comment]: <> (        <li><a href="#installation">Installation</a></li>)
-
-[comment]: <> (      </ul>)
-
-[comment]: <> (    </li>)
-
-[comment]: <> (    <li><a href="#usage">Usage</a></li>)
-
-[comment]: <> (    <li><a href="#roadmap">Roadmap</a></li>)
-
-[comment]: <> (    <li><a href="#contributing">Contributing</a></li>)
-
-[comment]: <> (    <li><a href="#license">License</a></li>)
-
-[comment]: <> (    <li><a href="#contact">Contact</a></li>)
-
-[comment]: <> (    <li><a href="#acknowledgements">Acknowledgements</a></li>)
-
-[comment]: <> (  </ol>)
-
-[comment]: <> (</details>)
+<details open="open"><summary>MỤC LỤC</summary>
+  <ol>
+    <a href="#1">I. Giới thiệu</a>
+    <br><a href="#2">II. Thông tin chung</a>
+    <br><a href="#3">III. Create Account</a>
+    <br><a href="#4">IV. Call Api (Lấy phương thức thanh toán)</a>
+    <ul>
+    <li><a href="#4.2">2. Payment</a></li>
+    <li><a href="#4.3">3. MoMo return result</a></li>
+    <li><a href="#4.4">4. API check transaction status</a></li>
+    <li><a href="#4.5">5. API refund</a></li>
+    </ul>
+    <br><a href="#5">V. Result Code (Bảng mã lỗi của MoMo)</a>
+    <br><a href="#6">VI. IPN - Instant Payment Notification</a>
+    <br><a href="#7">VII. QUY TRÌNH TEST - ACCOUNT TEST</a>
+  </ol>
+</details>
 
 
 
 <!-- ABOUT -->
-# I. Giới thiệu
+<h1 id="1">I. Giới thiệu</h1>
+
 Nhầm hỗ trợ các đối tác tích hợp các giải pháp thanh toán của MoMo. Tài liệu này sẽ hướng dẫn các bạn cách tích hợp tối ưu nhất.
 
 * Giải pháp toàn vẹn - Cổng thanh toán [ALL IN ONE](https://developers.momo.vn/#/docs/aiov2/) version 2 (AIOv2).
@@ -107,7 +80,7 @@ Nhầm hỗ trợ các đối tác tích hợp các giải pháp thanh toán c�
 
 
 <!-- GETTING STARTED -->
-# II. Lựa chọn giải pháp
+### Lựa chọn giải pháp
 
 [AIOv2](https://developers.momo.vn/#/docs/aiov2/) là giải pháp thanh toán của MoMo áp dụng trên nhiều nền tảng khác nhau chỉ trong một API duy nhất.
 
@@ -144,7 +117,8 @@ Tham khảo hướng dẫn sau để áp dụng MoMo vào trang mua hàng của 
 * Bước 5: Sau khi thanh toán xong MoMo sẽ chuyển khách hàng về trang mua hàng
 * Bước 6: Server của bạn xác thực giao dịch và cập nhật dịch vụ cho khách hàng
 
-# III. Thông tin chung
+<h1 id="2">II. Thông tin chung</h1>
+
 * <b>Domain</b>
 
 | Environment | Domain |
@@ -184,7 +158,8 @@ Tham khảo hướng dẫn sau để áp dụng MoMo vào trang mua hàng của 
 
 Tool Debug [API redirectUrl & ipnUrl](https://developers.momo.vn/#/docs/aio/?id=debug) hỗ trợ trong quá trình dev
 
-# IV. Create Account
+<h1 id="3">III. Create Account</h1>
+
 > Warning! Vui lòng không chia sẻ KEY Production cho bất cứ ai, chúng tôi
 sẽ không xử lý những trường hợp KEY Production bị phát tán ra ngoài.
 
@@ -215,8 +190,10 @@ Import postman theo hình minh họa bên dưới
 </p>
 </details>
 
-# V. Call Api
-## 1. Create Transaction (Lấy phương thức thanh toán) [docs link](https://developers.momo.vn/#/docs/aiov2/?id=l%e1%ba%a5y-ph%c6%b0%c6%a1ng-th%e1%bb%a9c-thanh-to%c3%a1n)
+<h1 id="4">IV. Call Api (Lấy phương thức thanh toán)</h1>
+<h2 id="4.1">1. Create Transaction (Lấy phương thức thanh toán)</h2>
+
+[docs link](https://developers.momo.vn/#/docs/aiov2/?id=l%e1%ba%a5y-ph%c6%b0%c6%a1ng-th%e1%bb%a9c-thanh-to%c3%a1n)
 >POST <span style="color:orange">/v2/gateway/api/create</span>
 
 * HTTP Request
@@ -227,8 +204,8 @@ Import postman theo hình minh họa bên dưới
 |partnerName	|String|	|	Tên đối tác|
 |storeId	|String|		|Thông tin cửa hàng|
 |requestId	|String|	√|	Định danh mỗi yêu cầu|
-|amount	|Long|	√|	Số tiền cần thanh toán. tối thiểu 1.000 VND tối đa 20.000.000 VND. Tiền tệ: VND|
-|orderId	|String|	√|	Mã đơn hàng thanh toán của đối tác (duy nhất không trùng lập)|
+|amount	|Long|	√|	Số tiền cần thanh toán. tối thiểu 1.000 VND tối đa 20.000.000 VND. Tiền tệ: VND. (⚠️Muốn vượt 20tr cần liên hệ MoMo)|
+|orderId	|String|	√|	Mã đơn hàng thanh toán của đối tác (duy nhất không trùng lập) (⚠️Không sử dùng ký tự đặc biệt) |
 |orderInfo	|String|	√|	Thông tin đơn hàng mô tả|
 |redirectUrl	|String|	√|	Một URL của đối tác. URL này được sử dụng để chuyển trang (redirect) từ MoMo về trang mua hàng của đối tác sau khi khách hàng thanh toán. Hỗ trợ: <details><summary><span style="color:orange">AppLink và WebLink</span></summary><p>Tìm hiểu thêm về AppLink<br>Android: https://developer.android.com/training/app-links <br>IOS: https://developer.apple.com/documentation/uikit/core_app/.. </p></details></span>|
 |ipnUrl	|String|	√|	API của đối tác. Được MoMo sử dụng để gửi kết quả thanh toán theo phương thức IPN (server-to-server)|
@@ -249,7 +226,7 @@ Import postman theo hình minh họa bên dưới
 |amount	|Long|	√|	Giống với số tiền yêu cầu ban đầu|
 |responseTime	|Long|	√|	Thời gian trả kết quả thanh toán về đối tác. Vd: 1625030045458|
 |message	|String|	√|	Mô tả lỗi (tiếng Anh hoặc tiếng Việt dựa vào biến "land"|
-|resultCode	|int|	√|	Mã lỗi >>|
+|resultCode	|int|	√|	<a href="#result-code">Mã lỗi MoMo »</a>|
 |payUrl	|String|	√|	URL để chuyển từ trang mua hàng của đối tác sang trang thanh toán của MoMo|
 |deeplink	|String|	|URL để mở ứng dụng trực tiếp MoMo (Khách hàng phải cài đặt ứng dụng MoMo trước) và trang xác nhận thanh toán.|
 |qrCodeUrl	|String|	|	Dữ liệu để tạo mã QR nếu bạn muốn khách hàng quét mã QR trực tiếp trên trang mua hàng hoặc in mã lên hoá đơn.<br>Lưu ý: Đây không phải URL chứa hình ảnh của mã QR, bạn cần sử dụng thư viện ngoài để tạo mã QR.|
@@ -297,11 +274,11 @@ Response Body
 }
 ```
 
-<h2 id="custom-id">2. Payment</h2>
+<h2 id="4.2">2. Payment</h2>
 
-> CHỌN 1 TRONG 4 phương thức: payUrl, deeplink, qrCodeUrl, deeplinkMiniApp<br>
+> CHỌN 1 TRONG 4<br>
 
-> Ở tại bước thanh toán trên nền tảng ⚠️WEB của đối tác Desktop/Mobile.<br>
+> Ở tại bước thanh toán trên nền tảng ⚠️WEB của đối tác trên Desktop/Mobile.<br>
 
 <details><summary>Phương thức 1: payUrl (thông dụng và phổ biến nhất)</summary>
 <p align="left">
@@ -317,207 +294,316 @@ Open URL payUrl để chuyển từ trang mua hàng của đối tác sang trang
 Dữ liệu qrCodeUrl để tạo mã QR. Khách hàng quét mã QR trực tiếp trên trang mua hàng hoặc in mã lên hoá đơn. Mã QR sẽ hết hạn trong 5 phút (có thể thay đổi theo yêu cầu của đối tác)
 </details>
 
+-----------------------
+-----------------------
 >Ở tại bước thanh toán trên nền tảng **⚠️APP** của đối tác
 <details><summary>Phương thức 3: deeplink (App-in-app, Mobile Web)</summary>
-App-in-app : App đối tác - 
-
-
-<p align="left"><img src="assets/postman.png" alt="flow" width="50%"></details>
+App-in-app : App đối tác gọi deeplink mở App MoMo thanh toán
+<br>
+Mobile Web : Web đối tác (Mobile View) bước thanh toán gọi deeplink App MoMo thanh toán
+</details>
 <br>
 <details><summary>Phương thức 4: deeplinkMiniApp (Đang cập nhật)</summary><p align="left">
 Dành cho đối tác có MiniApp nằm trong Siêu App MoMo
 </details>
 
-
-
-## 1. Create Transaction (Lấy phương thức thanh toán) [docs link](https://developers.momo.vn/#/docs/aiov2/?id=l%e1%ba%a5y-ph%c6%b0%c6%a1ng-th%e1%bb%a9c-thanh-to%c3%a1n)
-
-
-
-
-
-
-
-[comment]: <> (* npm)
-
-[comment]: <> (  ```sh)
-
-[comment]: <> (  npm install npm@latest -g)
-
-[comment]: <> (  ```)
-
-[comment]: <> (### Installation)
-
-[comment]: <> (1. Get a free API Key at [https://example.com]&#40;https://example.com&#41;)
-
-[comment]: <> (2. Clone the repo)
-
-[comment]: <> (   ```sh)
-
-[comment]: <> (   git clone https://github.com/your_username_/Project-Name.git)
-
-[comment]: <> (   ```)
-
-[comment]: <> (3. Install NPM packages)
-
-[comment]: <> (   ```sh)
-
-[comment]: <> (   npm install)
-
-[comment]: <> (   ```)
-
-[comment]: <> (4. Enter your API in `config.js`)
-
-[comment]: <> (   ```JS)
-
-[comment]: <> (   const API_KEY = 'ENTER YOUR API';)
-
-[comment]: <> (   ```)
-
-
-
-[comment]: <> (<!-- USAGE EXAMPLES -->)
-
-[comment]: <> (## Usage)
-
-[comment]: <> (Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.)
-
-[comment]: <> (_For more examples, please refer to the [Documentation]&#40;https://example.com&#41;_)
-
-
-
-[comment]: <> (<!-- ROADMAP -->)
-
-[comment]: <> (## Roadmap)
-
-[comment]: <> (See the [open issues]&#40;https://github.com/othneildrew/Best-README-Template/issues&#41; for a list of proposed features &#40;and known issues&#41;.)
-
-
-
-[comment]: <> (<!-- CONTRIBUTING -->)
-
-[comment]: <> (## Contributing)
-
-[comment]: <> (Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.)
-
-[comment]: <> (1. Fork the Project)
-
-[comment]: <> (2. Create your Feature Branch &#40;`git checkout -b feature/AmazingFeature`&#41;)
-
-[comment]: <> (3. Commit your Changes &#40;`git commit -m 'Add some AmazingFeature'`&#41;)
-
-[comment]: <> (4. Push to the Branch &#40;`git push origin feature/AmazingFeature`&#41;)
-
-[comment]: <> (5. Open a Pull Request)
-
-
-
-[comment]: <> (<!-- LICENSE -->)
-
-[comment]: <> (## License)
-
-[comment]: <> (Distributed under the MIT License. See `LICENSE` for more information.)
-
-
-
-[comment]: <> (<!-- CONTACT -->)
-
-[comment]: <> (## Contact)
-
-[comment]: <> (Your Name - [@your_twitter]&#40;https://twitter.com/your_username&#41; - email@example.com)
-
-[comment]: <> (Project Link: [https://github.com/your_username/repo_name]&#40;https://github.com/your_username/repo_name&#41;)
-
-
-
-[comment]: <> (<!-- ACKNOWLEDGEMENTS -->)
-
-[comment]: <> (## Acknowledgements)
-
-[comment]: <> (* [GitHub Emoji Cheat Sheet]&#40;https://www.webpagefx.com/tools/emoji-cheat-sheet&#41;)
-
-[comment]: <> (* [Img Shields]&#40;https://shields.io&#41;)
-
-[comment]: <> (* [Choose an Open Source License]&#40;https://choosealicense.com&#41;)
-
-[comment]: <> (* [GitHub Pages]&#40;https://pages.github.com&#41;)
-
-[comment]: <> (* [Animate.css]&#40;https://daneden.github.io/animate.css&#41;)
-
-[comment]: <> (* [Loaders.css]&#40;https://connoratherton.com/loaders&#41;)
-
-[comment]: <> (* [Slick Carousel]&#40;https://kenwheeler.github.io/slick&#41;)
-
-[comment]: <> (* [Smooth Scroll]&#40;https://github.com/cferdinandi/smooth-scroll&#41;)
-
-[comment]: <> (* [Sticky Kit]&#40;http://leafo.net/sticky-kit&#41;)
-
-[comment]: <> (* [JVectorMap]&#40;http://jvectormap.com&#41;)
-
-[comment]: <> (* [Font Awesome]&#40;https://fontawesome.com&#41;)
-
-
-
-
-
-[comment]: <> (<!-- MARKDOWN LINKS & IMAGES -->)
-
-[comment]: <> (<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->)
-
-[comment]: <> ([contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge)
-
-[comment]: <> ([contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors)
-
-[comment]: <> ([forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge)
-
-[comment]: <> ([forks-url]: https://github.com/othneildrew/Best-README-Template/network/members)
-
-[comment]: <> ([stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge)
-
-[comment]: <> ([stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers)
-
-[comment]: <> ([issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge)
-
-[comment]: <> ([issues-url]: https://github.com/othneildrew/Best-README-Template/issues)
-
-[comment]: <> ([license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge)
-
-[comment]: <> ([license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt)
-
-[comment]: <> ([linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555)
-
-[comment]: <> ([linkedin-url]: https://linkedin.com/in/othneildrew)
-
-[comment]: <> ([product-screenshot]: images/screenshot.png)
-
-
-[comment]: <> (| Syntax      | Description | Test Text     |)
-
-[comment]: <> (| :---        |    :----:   |          ---: |)
-
-[comment]: <> (| Header      | Title       | Here's this   |)
-
-[comment]: <> (| Paragraph   | Text        | And more      |)
-
-
-[comment]: <> (| Syntax | Description |)
-
-[comment]: <> (| --- | ----------- |)
-
-[comment]: <> (| Header | Title |)
-
-[comment]: <> (| Paragraph | Text |)
-
-Here's a sentence with a footnote. [^1]
-[^1]: This is the footnote.
-
-### My Great Heading {#custom-id}
-<h6 id="custom-id"></h3>
-
-
-term
-: definition
-
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
+<h2 id="4.3">3. MoMo return result</h2>
+
+Sau khi khách hàng thực hiện thanh toán trên app MoMo. MoMo sẽ **⚠️ CHỦ ĐỘNG** thông báo kết quả cho đối tác trong qua 2 phương thức:
+<br>
+1. redirectUrl : App MoMo sẽ Open URL redirectUrl (Có thể bị MISS do user KILL APP hoặc thoát ngang tiến trình thanh toán)
+2. ipnUrl : Server MoMo sẽ chủ động call ipnURL sau khi hệ thống MoMo có kết quả cuối cùng.
+<br>
+   
+Trong trường hợp Server của đối tác không nhân được tín hiệu ipnUrl trong vòng 30s.
+<br>
+**⚠️ HÃY CHỦ ĐỘNG gọi API kiểm tra trạng thái giao dịch**
+
+<h2 id="4.4">4. API check transaction status</h2>
+
+Tra cứu thông tin giao dịch
+>POST <span style="color:orange">/v2/gateway/api/query</span>
+
+* HTTP Request
+
+|Attribute	|Type	|Required	|Description|
+|---|---|---|---|
+|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
+|requestId	|String|	√|	Định danh mỗi yêu cầu|
+|orderId	|String|	√|	Mã đơn hàng thanh toán của đối tác cần truy vấn (duy nhất không trùng lập)|
+|lang	|String|	√|	Ngôn ngữ của message được trả về (vi hoặc en)|
+|signature	|String|	√|	Chữ ký. HMAC_SHA256(accessKey=$accessKey&orderId=$orderId&partnerCode=$partnerCode&requestId=$requestId,secretKey) |
+
+
+* HTTP Response
+
+|Attribute	|Type	|Required	|Description|
+|---|---|---|---|
+|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
+|requestId	|String|	√|	Giống với yêu cầu ban đầu|
+|orderId	|String|	√	|Mã đơn hàng của đối tác|
+|extraData	|String|	√	|Thông tin thêm. Mặc định là giá trị mà đơn vị kinh doanh truyền qua ở lệnh captureWallet|
+|amount	|Long|	√|	Số tiền của đơn hàng|
+|transId	|Long|	√|	Mã giao dịch của MoMo (duy nhất không trùng - dùng để đối soát 2 bên)|
+|payType	|String|	√|	Hình thức thanh toán. web hoặc qr. Mặc định là "" nếu không thanh toán|
+|resultCode	|int|	√|	<a href="#result-code">Mã lỗi MoMo »</a>|
+|refundTrans	|JsonArray|	√|	Danh sách các giao dịch hoàn tiền. Các thuốc tính của 1 giao dịch refund|
+|message	|String|	√|	Mô tả lỗi (tiếng Anh hoặc tiếng Việt dựa vào biến "land"|
+|responseTime	|Long|	√|	Thời gian trả kết quả thanh toán về đối tác. Vd: 1625030045458|
+
+* Bảng mô tả nội dung refundTrans
+
+|Attribute	|Type	|Required	|Description|
+|---|---|---|---|
+|orderId	|String|	√	|Mã đơn hàng của đối tác|
+|amount	|Long|	√|	Số tiền của đơn hàng|
+|resultCode	|int|	√|	<a href="#result-code">Mã lỗi MoMo »</a>|
+|transId	|Long|	√|	Mã giao dịch của MoMo (duy nhất không trùng - dùng để đối soát 2 bên)|
+|createdTime	|Long|	√|	Thời gian yêu cầu hoàn tiền. Định dạng: timestamp. Vd: 1625030045458|
+
+DATA Example
+<br>
+https://test-payment.momo.vn/v2/gateway/api/query
+<br>
+Request Body
+
+```json
+{
+  "partnerCode": "123456",
+  "requestId": "1527246504579",
+  "orderId": "1527246478428",
+  "signature": "13be80957a5ee32107198920fa26aa85a4ca238a29f46e292e8c33dd9186142a",
+  "lang": "en"
+}
+```
+Response Body
+```json
+{
+  "partnerCode": "123456",
+  "requestId": "1527246504579",
+  "orderId": "1527246478428",
+  "extraData": "",
+  "amount": 55000,
+  "transId": 2509377991,
+  "payType": "qr",
+  "resultCode": 0,
+  "refundTrans": [
+    {
+      "orderId": "1540374560708",
+      "amount": 5000,
+      "resultCode": 0,
+      "transId": 1344317,
+      "createdTime": "1618557804720"
+    },
+    {
+      "orderId": "1540374560708",
+      "amount": 5000,
+      "resultCode": 0,
+      "transId": 1344317,
+      "createdTime": "1618557804720"
+    }
+  ],
+  "message": "Success",
+  "responseTime": 145245576
+}
+```
+
+<h2 id="4.5">5. API refund</h2>
+
+Sử dụng để hoàn tiền cho giao dịch thanh toán.
+
+1. Hoàn tiền một phần: hoàn tiền lại 1 phần số tiền đã giao dịch (khi số tiền cần hoàn nhỏ hơn số tiền đã thanh toán).
+
+2. Hoàn tiền toàn phần: hoàn tiền toàn bộ số tiền đã giao dịch (khi số tiền cần hoàn bằng số tiền đã thanh toán).
+>POST <span style="color:orange">/v2/gateway/api/refund</span>
+
+* HTTP Request
+
+|Attribute	|Type	|Required	|Description|
+|---|---|---|---|
+|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
+|orderId	|String|	√|	Mã đơn hàng hoàn tiền là riêng biệt so với mã đơn hàng thanh toán (⚠️Không sử dùng ký tự đặc biệt)|
+|requestId	|String|	√|	Định danh mỗi yêu cầu|
+|amount	|Long|	√|	Số tiền cần được hoàn tiền (< hoặc = tổng tiền đã thanh toán)|
+|transId	|Long|	√|	Mã giao dịch của MoMo (Mã này được MoMo cung cấp sau khi giao dịch thanh toán thành công)|
+|lang	|String|	√|	Ngôn ngữ của message được trả về (vi hoặc en)|
+|description	|String|	|	Mô tả yêu cầu hoàn tiền|
+|signature	|String|	√|	HMAC_SHA256(accessKey=$acessKey&amount=$amount&description=$description&orderId=$orderId&partnerCode=$partnerCode&requestId=$requestId&transId=$transId,secretKey)|
+
+* HTTP Response
+
+|Attribute	|Type	|Required	|Description|
+|---|---|---|---|
+|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
+|orderId	|String|	√	|Mã đơn hàng của đối tác|
+|requestId	|String|	√|	Giống với yêu cầu ban đầu|
+|extraData	|String|	√	|Thông tin thêm. Mặc định là giá trị mà đơn vị kinh doanh truyền qua ở lệnh captureWallet|
+|amount	|Long|	√|	Số tiền được hoàn|
+|transId	|Long|	√|	Mã giao dịch của MoMo|
+|resultCode	|int|	√|	<a href="#result-code">Mã lỗi MoMo »</a>|
+|message	|String|	√|	Mô tả lỗi (tiếng Anh hoặc tiếng Việt dựa vào biến "land"|
+|responseTime	|Long|	√|	Thời gian trả kết quả thanh toán về đối tác. Vd: 1625030045458|
+
+DATA Example
+<br>
+https://test-payment.momo.vn/v2/gateway/api/refund
+<br>
+Request Body
+
+```json
+{
+  "partnerCode": "MOMO",
+  "orderId": "1527297954700",
+  "requestId": "1527314064527",
+  "amount": 55000,
+  "transId": 144492817,
+  "lang": "vi",
+  "description": "",
+  "signature": "8cdba11a7ff4cc7267d2b23c1f5d228a2ee52af1095420f9571c2d64ec6735fe"
+}
+```
+Response Body
+```json
+{
+  "partnerCode": "MOMO",
+  "orderId": "1527297954700",
+  "requestId": "1527314064527",
+  "amount": 55000,
+  "transId": 144518121,
+  "resultCode": 0,
+  "message": "Thành công",
+  "responseTime": 123456454512
+}
+```
+<h1 id="5">V. Result Code (Bảng mã lỗi của MoMo)</h1>
+
+| ResultCode | Status    | Description  |
+| ---         | ----------- |----------- |
+| 0    | Success |Thành công.|
+| 1000 | Fail |Giao dịch đã khởi tạo.|
+| 1001 | Fail |Mã đối tác sai hoặc không tồn tại.|
+| 1002 | Fail |	Giao dịch không tồn tại.|
+| 1003 | Fail |	Mã đơn hàng đã tồn tại.|
+| 1004 | Fail |	Giao dịch đang chờ xử lý.|
+| 1005 | Fail |	Số tiền thanh toán không hợp lệ.|
+| 1006 | Fail |	Yêu cầu không đúng định dạng.|
+| 1007 | Fail |	Chữ ký không hợp lệ.|
+| 1008 | Fail |	Loại yêu cầu (requestType) sai hoặc không được hỗ trợ với mã đối tác (partnerCode) hiện tại.|
+| 1009 | Fail |	Đối tác chưa được kích hoạt.|
+| 2001 | Fail |	Ví Momo của người dùng chưa liên kết với ngân hàng.|
+| 2005 | Fail |	Phiên đăng nhập người dùng đã hết hạn.|
+| 3001 | Fail |	Ví Momo của người dùng không đủ tiền.|
+| 3002 | Fail |	Vượt quá mức thanh toán mỗi ngày của ví Momo.|
+| 3004 | Fail |	Thanh toán sử dụng nguồn tiền {moneySource} không thành công.|
+| 3006 | Fail |	Phiên xử lý giao dịch đã hết hạn.|
+| 3007 | Fail |	Người dùng huỷ giao dịch.|
+| 3010 | Fail |	Giao dịch thanh toán đã được xử lý.|
+| 4001 | Fail |	Số tiền hoàn vượt quá số tiền đã thanh toán hoặc giao dịch hoàn tiền đã được xử lý.|
+| 4002 | Fail |	Không thể hoàn tiền cho giao dịch này.|
+| 6001 | Fail |	Hệ thống đang bảo trì.|
+| 6999  | Pending |Lỗi hệ thống không xác định.|
+| Mã lỗi lạ  | Pending |Mã lỗi lạ chưa định nghĩa, cần treo giao dịch|
+
+<h1 id="6">VI. IPN - Instant Payment Notification</h1>
+
+<p>
+Instant Payment Notification (IPN) được sử dụng để thông báo kết quả
+<br>giao dịch ngay lập tức cho nhà sử dụng dịch vụ thanh toán:
+
+QR payment: Web, SmartTv.
+<br>Online payment
+<br>Recurring Payment
+
+Merchant ⚠️PHẢI ⚠️PHẢI ⚠️PHẢI sử dụng hệ thống backend của mình để tiếp nhận xử lý
+<br>thông tin nhận được từ PSP:
+
+</p>
+
+
+>POST <span style="color:orange">https://partner.com.vn/ipnUrl </span>
+> <br> Tùy đối tác tạo ipnUrl thế nào cũng được
+* HTTP Request
+
+|Attribute	|Type	|Required	|Description|
+|---|---|---|---|
+|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
+|orderId	|String|	√|	Mã đơn hàng của đối tác|
+|requestId	|String|	√|	requestId của đối tác|
+|amount	|Long|	√|	Số tiền thanh toán|
+|orderInfo	|String|	√|	Thông tin đơn hàng|
+|orderType	|String|	√|	momo_wallet|
+|transId	|Long|	√|	Mã giao dịch của MoMo|
+|resultCode	|int|	√|	Trạng thái giao dịch của đơn hàng|
+|message	|String|	√|	Mô tả lỗi dựa trên lang|
+|payType	|String|	√|	Hình thức thanh toán: web or qr|
+|responseTime	|Long|	√|	Thời gian trả kết quả thanh toán về đối tác|
+|extraData	|String|	√|	Thông tin thêm. Mặc định là ""|
+|signature	|String|	√|	Chữ ký để kiểm tra tính đúng đắn của dữ liệu khi truyền tải trên mạng. Sử dụng thuật toán Hmac_SHA256 với data theo định dạng được sort từ a-z :HMAC_SHA256(accessKey=$accessKey&amount=$amount&extraData=$extraData&message=$message&orderId=$orderId&orderInfo=$orderInfo&orderType=$orderType&partnerCode=$partnerCode&payType=$payType&requestId=$requestId&responseTime=$responseTime&resultCode=$resultCode&transId=$transId, secretKey)|
+
+DATA Example
+<br>
+https://vuaxoso.vn:11344/api/momo/v2_notify
+<br>
+Request Body
+```json
+{
+  "orderType": "momo_wallet",
+  "amount": 583000,
+  "partnerCode": "MOMORK3O20210118",
+  "orderId": "300000446",
+  "extraData": "",
+  "signature": "b2a9b8801f932d247257ef02053009eb0ac80aa843c2b91369e754934a7c2779",
+  "transId": 2540700569,
+  "responseTime": 1625469891892,
+  "resultCode": 0,
+  "message": "Thành công",
+  "payType": "webApp",
+  "requestId": "300000446",
+  "orderInfo": "Xổ số kiến thiết"
+}
+```
+MOMO không quan tâm response của đối tác đối với API ipnUrl này, đối tác tự do trả về Response
+<br>
+Response Body
+```json
+{
+  "status": 0,
+  "message": "Accept confirm Order",
+  "orderId": "300000446",
+  "momoTransId": "2540700569"
+}
+```
+
+<h1 id="7">VII. QUY TRÌNH TEST - ACCOUNT TEST</h1>
+
+[LINK DOCS GỐC](https://developers.momo.vn/#/docs/testing_information) 
+
+CÀI APP MOMO TEST<br>
+Link Install App MoMo Test : https://test-payment.momo.vn/download/
+
+Account Test login App MoMo Test
+
+| STT | Account | OTP | Password |
+| --- | ----------- | ----------- | ----------- |
+| 1 | 0938023111| 000000 | 000000 |
+| 2 | 0938023112| 000000 | 000000 |
+| 3 | 0938023113| 000000 | 000000 |
+| 4 | 0938023114| 000000 | 000000 |
+| 5 | 0938023115| 000000 | 000000 |
+| 6 | 0938023116| 000000 | 000000 |
+| 7 | 0938023117| 000000 | 000000 |
+| 8 | 0938023118| 000000 | 000000 |
+| 9 | 0938023119| 000000 | 000000 |
+| 10 | 0938023110| 000000 | 000000 |
+
+TEST CASE:
+<br>
+https://developers.momo.vn/docs/test/MoMo-Online-Payment-Testcase-vi-v1.1.pdf
+
+
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br>
+Email: toancongdang28@gmail.com
