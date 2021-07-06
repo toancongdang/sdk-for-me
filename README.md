@@ -1,19 +1,3 @@
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -35,11 +19,6 @@
     ·
     <a href="https://business.momo.vn/login">Request Feature</a>
   </p>
-
-
-
-
-
 
 <!-- TABLE OF CONTENTS -->
 
@@ -81,21 +60,9 @@ Nhầm hỗ trợ các đối tác tích hợp các giải pháp thanh toán c�
 
 
 <!-- GETTING STARTED -->
-### Lựa chọn giải pháp
+### Lựa chọn giải phápu
 
 [AIOv2](https://developers.momo.vn/#/docs/aiov2/) là giải pháp thanh toán của MoMo áp dụng trên nhiều nền tảng khác nhau chỉ trong một API duy nhất.
-
-
-
-[comment]: <> (```bigquery)
-
-[comment]: <> (Trên môi trường thật &#40;production&#41;: )
-
-[comment]: <> (Bạn phải yêu cầu Bộ phận kinh doanh của MoMo, để được cung cấp quyền truy cập:)
-
-[comment]: <> (qrCodeUrl, deeplink, deeplinkWebInApp, deeplinkMiniApp, Refund)
-
-[comment]: <> (```)
 
 ## Sơ đồ xử lý
 Sơ đồ thanh toán đơn hàng trên website desktop/mobile
@@ -142,6 +109,7 @@ Tham khảo hướng dẫn sau để áp dụng MoMo vào trang mua hàng của 
 | Method | POST |
 | HTTP Status Code | 200 |
 
+<!--
 * <b>List API SDK MOMO</b>
 
 | API Name | Path | Docs |
@@ -150,14 +118,13 @@ Tham khảo hướng dẫn sau để áp dụng MoMo vào trang mua hàng của 
 | Query Transaction v2 | /v2/gateway/api/query | [[link]](https://developers.momo.vn/#/docs/aiov2/?id=ki%e1%bb%83m-tra-tr%e1%ba%a1ng-th%c3%a1i-giao-d%e1%bb%8bch) |
 | Refund Transaction v2| /v2/gateway/api/refund | [[link]](https://developers.momo.vn/#/docs/aiov2/?id=ho%c3%a0n-ti%e1%bb%81n-giao-d%e1%bb%8bch) |
 
-* <b>List API listen reesult-transaction from MoMo (Partner must-have)</b>
+* <b>List API listen result-transaction from MoMo (Partner must-have)</b>
 
 | API Name | Url | Docs |
 | --- | ----------- |--- |
 | redirectUrl | http(s)://domain.partner.vn/redirect/ | [[link]](https://developers.momo.vn/#/docs/aiov2/?id=giao-di%e1%bb%87n-redirect) |
 | ipnUrl | http(s)://domain.partner.vn/ipn/ | [[link]](https://developers.momo.vn/#/docs/aiov2/?id=ipn-instant-payment-notification) |
-
-Tool Debug [API redirectUrl & ipnUrl](https://developers.momo.vn/#/docs/aio/?id=debug) hỗ trợ trong quá trình dev
+-->
 
 <h1 id="3">III. Create Account</h1>
 
@@ -195,7 +162,11 @@ Import postman theo hình minh họa bên dưới
 <h2 id="4.1">1. Create Transaction (Lấy phương thức thanh toán)</h2>
 
 [docs link](https://developers.momo.vn/#/docs/aiov2/?id=l%e1%ba%a5y-ph%c6%b0%c6%a1ng-th%e1%bb%a9c-thanh-to%c3%a1n)
->POST <span style="color:orange">/v2/gateway/api/create</span>
+ ```js
+Test : https://test-payment.momo.vn/v2/gateway/api/create
+
+Prod : https://payment.momo.vn/v2/gateway/api/create
+```
 
 * HTTP Request
 
@@ -209,7 +180,7 @@ Import postman theo hình minh họa bên dưới
 |orderId	|String|	√|	Mã đơn hàng thanh toán của đối tác (duy nhất không trùng lập) (⚠️Không sử dùng ký tự đặc biệt) |
 |orderInfo	|String|	√|	Thông tin đơn hàng mô tả|
 |redirectUrl	|String|	√|	Một URL của đối tác. URL này được sử dụng để chuyển trang (redirect) từ MoMo về trang mua hàng của đối tác sau khi khách hàng thanh toán. Hỗ trợ: <details><summary><span style="color:orange">AppLink và WebLink</span></summary><p>Tìm hiểu thêm về AppLink<br>Android: https://developer.android.com/training/app-links <br>IOS: https://developer.apple.com/documentation/uikit/core_app/.. </p></details></span>|
-|ipnUrl	|String|	√|	API của đối tác. Được MoMo sử dụng để gửi kết quả thanh toán theo phương thức IPN (server-to-server)|
+|ipnUrl	|String|	√|	API của đối tác. Được MoMo sử dụng để gửi kết quả thanh toán theo phương thức IPN (server-to-server).<br>Tool Debug [API redirectUrl & ipnUrl](https://developers.momo.vn/#/docs/aio/?id=debug) hỗ trợ trong quá trình dev|
 |requestType	|String|	√|	<span style="color:red">captureWallet</span>|
 |extraData	|String|	√|	Mặc định là trống "", Encode base64 theo định dạng Json: {"key":"value"}. VD với dữ liệu: {"username": "SDK4ME"} thì data của extraData là eyJ1c2VybmFtZSI6ICJTREs0TUUifQ==|
 |lang	|String|	√|	Ngôn ngữ của message được trả về (vi hoặc en)|
@@ -323,8 +294,11 @@ Trong trường hợp Server của đối tác không nhân được tín hiệu
 <h2 id="4.4">4. API check transaction status</h2>
 
 Tra cứu thông tin giao dịch
->POST <span style="color:orange">/v2/gateway/api/query</span>
+ ```js
+Test : https://test-payment.momo.vn/v2/gateway/api/query
 
+Prod : https://payment.momo.vn/v2/gateway/api/query
+```
 * HTTP Request
 
 |Attribute	|Type	|Required	|Description|
@@ -416,8 +390,11 @@ Sử dụng để hoàn tiền cho giao dịch thanh toán.
 1. Hoàn tiền một phần: hoàn tiền lại 1 phần số tiền đã giao dịch (khi số tiền cần hoàn nhỏ hơn số tiền đã thanh toán).
 
 2. Hoàn tiền toàn phần: hoàn tiền toàn bộ số tiền đã giao dịch (khi số tiền cần hoàn bằng số tiền đã thanh toán).
->POST <span style="color:orange">/v2/gateway/api/refund</span>
+ ```js
+Test : https://test-payment.momo.vn/v2/gateway/api/refund
 
+Prod : https://payment.momo.vn/v2/gateway/api/refund
+```
 * HTTP Request
 
 |Attribute	|Type	|Required	|Description|
