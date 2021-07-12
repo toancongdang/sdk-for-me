@@ -89,42 +89,27 @@ Tham khảo hướng dẫn sau để áp dụng MoMo vào trang mua hàng của 
 
 * <b>Domain</b>
 
-| Environment | Domain |
-| --- | ----------- |
-| Production | https://payment.momo.vn |
-| Test | https://test-payment.momo.vn |
+| Environment | Domain                       |
+| ----------- | ---------------------------- |
+| Production  | https://payment.momo.vn      |
+| Test        | https://test-payment.momo.vn |
 
 * <b>IP Address</b>
 
-| Environment | Incoming    | Outcoming  |
-| ---         | ----------- |----------- |
-| Production  | 210.245.113.71 |118.69.210.244|
-| Test        | 118.69.212.158 |118.69.210.244|
+| Environment | Incoming       | Outcoming      |
+| ----------- | -------------- | -------------- |
+| Production  | 210.245.113.71 | 118.69.210.244 |
+| Test        | 118.69.212.158 | 118.69.210.244 |
 
 * <b>HTTP Request</b>
 
-| Key | Value |
-| --- | ----------- |
-| Content-Type | application/json; charset=UTF-8 |
-| Method | POST |
-| HTTP Status Code | 200 |
+| Key              | Value                           |
+| ---------------- | ------------------------------- |
+| Content-Type     | application/json; charset=UTF-8 |
+| Method           | POST                            |
+| HTTP Status Code | 200                             |
 
-<!--
-* <b>List API SDK MOMO</b>
 
-| API Name | Path | Docs |
-| --- | ----------- |--- |
-| Create Transaction v2 | /v2/gateway/api/create | [[link]](https://developers.momo.vn/#/docs/aiov2/?id=l%e1%ba%a5y-ph%c6%b0%c6%a1ng-th%e1%bb%a9c-thanh-to%c3%a1n) |
-| Query Transaction v2 | /v2/gateway/api/query | [[link]](https://developers.momo.vn/#/docs/aiov2/?id=ki%e1%bb%83m-tra-tr%e1%ba%a1ng-th%c3%a1i-giao-d%e1%bb%8bch) |
-| Refund Transaction v2| /v2/gateway/api/refund | [[link]](https://developers.momo.vn/#/docs/aiov2/?id=ho%c3%a0n-ti%e1%bb%81n-giao-d%e1%bb%8bch) |
-
-* <b>List API listen result-transaction from MoMo (Partner must-have)</b>
-
-| API Name | Url | Docs |
-| --- | ----------- |--- |
-| redirectUrl | http(s)://domain.partner.vn/redirect/ | [[link]](https://developers.momo.vn/#/docs/aiov2/?id=giao-di%e1%bb%87n-redirect) |
-| ipnUrl | http(s)://domain.partner.vn/ipn/ | [[link]](https://developers.momo.vn/#/docs/aiov2/?id=ipn-instant-payment-notification) |
--->
 
 <h1 id="3">III. Create Account</h1>
 
@@ -137,14 +122,14 @@ sẽ không xử lý những trường hợp KEY Production bị phát tán ra n
 <details><summary>CLICK ME !!! Account Test tạo sẵn</summary>
 <p>
 
-| Key Test | Value |
-| --- | ----------- |
-| partnerCode | MOMONPMB20210629|
-| partnerName | Tên doanh nghiệp SDK4ME|
-| accessKey | Q2XhhSdgpKUlQ4Ky|
-| secretKey | k6B53GQKSjktZGJBK2MyrDa7w9S6RyCf|
-| userwame | sdk_4_me |
-| password | sdk_4_me! |
+| Key Test    | Value                            |
+| ----------- | -------------------------------- |
+| partnerCode | MOMONPMB20210629                 |
+| partnerName | Tên doanh nghiệp SDK4ME          |
+| accessKey   | Q2XhhSdgpKUlQ4Ky                 |
+| secretKey   | k6B53GQKSjktZGJBK2MyrDa7w9S6RyCf |
+| userwame    | sdk_4_me                         |
+| password    | sdk_4_me!                        |
 </p>
 </details>
 <br>
@@ -170,39 +155,38 @@ Prod : https://payment.momo.vn/v2/gateway/api/create
 
 * HTTP Request
 
-|Attribute	|Type	|Required	|Description|
-|---|---|---|---|
-|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
-|partnerName	|String|	|	Tên đối tác|
-|storeId	|String|		|Thông tin cửa hàng|
-|requestId	|String|	√|	Định danh mỗi yêu cầu|
-|amount	|Long|	√|	Số tiền cần thanh toán. tối thiểu 1.000 VND tối đa 20.000.000 VND. Tiền tệ: VND. (⚠️Muốn vượt 20tr cần liên hệ MoMo)|
-|orderId	|String|	√|	Mã đơn hàng thanh toán của đối tác (duy nhất không trùng lập) (⚠️Không sử dùng ký tự đặc biệt) |
-|orderInfo	|String|	√|	Thông tin đơn hàng mô tả|
-|redirectUrl	|String|	√|	Một URL của đối tác. URL này được sử dụng để chuyển trang (redirect) từ MoMo về trang mua hàng của đối tác sau khi khách hàng thanh toán. Hỗ trợ: <details><summary><span style="color:orange">AppLink và WebLink</span></summary><p>Tìm hiểu thêm về AppLink<br>Android: https://developer.android.com/training/app-links <br>IOS: https://developer.apple.com/documentation/uikit/core_app/.. </p></details></span>|
-|ipnUrl	|String|	√|	API của đối tác. Được MoMo sử dụng để gửi kết quả thanh toán theo phương thức IPN (server-to-server).<br>Tool Debug [API redirectUrl & ipnUrl](https://developers.momo.vn/#/docs/aio/?id=debug) hỗ trợ trong quá trình dev|
-|requestType	|String|	√|	<span style="color:red">captureWallet</span>|
-|extraData	|String|	√|	Mặc định là trống "", Encode base64 theo định dạng Json: {"key":"value"}. VD với dữ liệu: {"username": "SDK4ME"} thì data của extraData là eyJ1c2VybmFtZSI6ICJTREs0TUUifQ==|
-|lang	|String|	√|	Ngôn ngữ của message được trả về (vi hoặc en)|
-|signature	|String|	√|	Chữ ký. Sử dụng thuật toán Hmac_SHA256 với các key-value được *__sắp xếp theo format A-Z__* |
+| Attribute   | Type   | Required | Description  |
+| ----------- | ------ | -------- | -------------|
+| partnerCode | String | √        | <a href="#iv-create-account">Thông tin tích hợp</a>  | partnerName | String |          | Tên đối tác                                                                                                                                                                                                                                                                                                                                                                                                           |
+| storeId     | String |          | Thông tin cửa hàng                                                                                                                                                                                                                                                                                                                                                                                                    |
+| requestId   | String | √        | Định danh mỗi yêu cầu                                                                                                                                                                                                                                                                                                                                                                                                 |
+| amount      | Long   | √        | Số tiền cần thanh toán. tối thiểu 1.000 VND tối đa 20.000.000 VND. Tiền tệ: VND. (⚠️Muốn vượt 20tr cần liên hệ MoMo)                                                                                                                                                                                                                                                                                                   |
+| orderId     | String | √        | Mã đơn hàng thanh toán của đối tác (duy nhất không trùng lập) (⚠️Không sử dùng ký tự đặc biệt)                                                                                                                                                                                                                                                                                                                         |
+| orderInfo   | String | √        | Thông tin đơn hàng mô tả                                                                                                                                                                                                                                                                                                                                                                                              |
+| redirectUrl | String | √        | Một URL của đối tác. URL này được sử dụng để chuyển trang (redirect) từ MoMo về trang mua hàng của đối tác sau khi khách hàng thanh toán. Hỗ trợ: <details><summary><span style="color:orange">AppLink và WebLink</span></summary><p>Tìm hiểu thêm về AppLink<br>Android: https://developer.android.com/training/app-links <br>IOS: https://developer.apple.com/documentation/uikit/core_app/.. </p></details></span> |
+| ipnUrl      | String | √        | API của đối tác. Được MoMo sử dụng để gửi kết quả thanh toán theo phương thức IPN (server-to-server).<br>Tool Debug [API redirectUrl & ipnUrl](https://developers.momo.vn/#/docs/aio/?id=debug) hỗ trợ trong quá trình dev                                                                                                                                                                                            |
+| requestType | String | √        | <span style="color:red">captureWallet</span>                                                                                                                                                                                                                                                                                                                                                                          |
+| extraData   | String | √        | Mặc định là trống "", Encode base64 theo định dạng Json: {"key":"value"}. VD với dữ liệu: {"username": "SDK4ME"} thì data của extraData là eyJ1c2VybmFtZSI6ICJTREs0TUUifQ==                                                                                                                                                                                                                                           |
+| lang        | String | √        | Ngôn ngữ của message được trả về (vi hoặc en)                                                                                                                                                                                                                                                                                                                                                                         |
+| signature   | String | √        | Chữ ký. Sử dụng thuật toán Hmac_SHA256 với các key-value được *__sắp xếp theo format A-Z__*                                                                                                                                                                                                                                                                                                                           |
 
 >signature = <span style="color:orange">HMAC_SHA256</span>(accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType, <span style="color:orange">secretKey</span>)
 
 * HTTP Response
 
-|Attribute	|Type	|Required	|Description|
-|---|---|---|---|
-|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
-|requestId	|String|	√|	Giống với yêu cầu ban đầu|
-|orderId	|String|	√	|Mã đơn hàng của đối tác|
-|amount	|Long|	√|	Giống với số tiền yêu cầu ban đầu|
-|responseTime	|Long|	√|	Thời gian trả kết quả thanh toán về đối tác. Vd: 1625030045458|
-|message	|String|	√|	Mô tả lỗi (tiếng Anh hoặc tiếng Việt dựa vào biến "land"|
-|resultCode	|int|	√|	<a href="#result-code">Mã lỗi MoMo »</a>|
-|payUrl	|String|	√|	URL để chuyển từ trang mua hàng của đối tác sang trang thanh toán của MoMo|
-|deeplink	|String|	|URL để mở ứng dụng trực tiếp MoMo (Khách hàng phải cài đặt ứng dụng MoMo trước) và trang xác nhận thanh toán.|
-|qrCodeUrl	|String|	|	Dữ liệu để tạo mã QR nếu bạn muốn khách hàng quét mã QR trực tiếp trên trang mua hàng hoặc in mã lên hoá đơn.<br>Lưu ý: Đây không phải URL chứa hình ảnh của mã QR, bạn cần sử dụng thư viện ngoài để tạo mã QR.|
-|deeplinkMiniApp	|String|	|	URL mở màn hình xác nhận thanh toán của ứng dụng MoMo. Áp dụng khi đối tác sử dụng mini app nhúng vào trong ứng dụng MoMo|
+| Attribute       | Type   | Required | Description                                                                                                                                                                                                      |
+| --------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| partnerCode     | String | √        | <a href="#iv-create-account">Thông tin tích hợp</a>                                                                                                                                                              |
+| requestId       | String | √        | Giống với yêu cầu ban đầu                                                                                                                                                                                        |
+| orderId         | String | √        | Mã đơn hàng của đối tác                                                                                                                                                                                          |
+| amount          | Long   | √        | Giống với số tiền yêu cầu ban đầu                                                                                                                                                                                |
+| responseTime    | Long   | √        | Thời gian trả kết quả thanh toán về đối tác. Vd: 1625030045458                                                                                                                                                   |
+| message         | String | √        | Mô tả lỗi (tiếng Anh hoặc tiếng Việt dựa vào biến "land"                                                                                                                                                         |
+| resultCode      | int    | √        | <a href="#result-code">Mã lỗi MoMo »</a>                                                                                                                                                                         |
+| payUrl          | String | √        | URL để chuyển từ trang mua hàng của đối tác sang trang thanh toán của MoMo                                                                                                                                       |
+| deeplink        | String |          | URL để mở ứng dụng trực tiếp MoMo (Khách hàng phải cài đặt ứng dụng MoMo trước) và trang xác nhận thanh toán.                                                                                                    |
+| qrCodeUrl       | String |          | Dữ liệu để tạo mã QR nếu bạn muốn khách hàng quét mã QR trực tiếp trên trang mua hàng hoặc in mã lên hoá đơn.<br>Lưu ý: Đây không phải URL chứa hình ảnh của mã QR, bạn cần sử dụng thư viện ngoài để tạo mã QR. |
+| deeplinkMiniApp | String |          | URL mở màn hình xác nhận thanh toán của ứng dụng MoMo. Áp dụng khi đối tác sử dụng mini app nhúng vào trong ứng dụng MoMo                                                                                        |
 
 >⚠️⚠️⚠️ LƯU Ý: Bạn phải yêu cầu quyền truy cập để sử dụng những trường qrCodeUrl, deeplink, deeplinkMiniApp.
 
@@ -301,40 +285,40 @@ Prod : https://payment.momo.vn/v2/gateway/api/query
 ```
 * HTTP Request
 
-|Attribute	|Type	|Required	|Description|
-|---|---|---|---|
-|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
-|requestId	|String|	√|	Định danh mỗi yêu cầu|
-|orderId	|String|	√|	Mã đơn hàng thanh toán của đối tác cần truy vấn (duy nhất không trùng lập)|
-|lang	|String|	√|	Ngôn ngữ của message được trả về (vi hoặc en)|
-|signature	|String|	√|	Chữ ký. HMAC_SHA256(accessKey=$accessKey&orderId=$orderId&partnerCode=$partnerCode&requestId=$requestId,secretKey) |
+| Attribute   | Type   | Required | Description  |
+| ----------- | ------ | -------- | -------------- |
+| partnerCode | String | √        | <a href="#iv-create-account">Thông tin tích hợp</a>                                                                |
+| requestId   | String | √        | Định danh mỗi yêu cầu                                                                                              |
+| orderId     | String | √        | Mã đơn hàng thanh toán của đối tác cần truy vấn (duy nhất không trùng lập)                                         |
+| lang        | String | √        | Ngôn ngữ của message được trả về (vi hoặc en)                                                                      |
+| signature   | String | √        | Chữ ký. HMAC_SHA256(accessKey=$accessKey&orderId=$orderId&partnerCode=$partnerCode&requestId=$requestId,secretKey) |
 
 
 * HTTP Response
 
-|Attribute	|Type	|Required	|Description|
-|---|---|---|---|
-|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
-|requestId	|String|	√|	Giống với yêu cầu ban đầu|
-|orderId	|String|	√	|Mã đơn hàng của đối tác|
-|extraData	|String|	√	|Thông tin thêm. Mặc định là giá trị mà đơn vị kinh doanh truyền qua ở lệnh captureWallet|
-|amount	|Long|	√|	Số tiền của đơn hàng|
-|transId	|Long|	√|	Mã giao dịch của MoMo (duy nhất không trùng - dùng để đối soát 2 bên)|
-|payType	|String|	√|	Hình thức thanh toán. web hoặc qr. Mặc định là "" nếu không thanh toán|
-|resultCode	|int|	√|	<a href="#result-code">Mã lỗi MoMo »</a>|
-|refundTrans	|JsonArray|	√|	Danh sách các giao dịch hoàn tiền. Các thuốc tính của 1 giao dịch refund|
-|message	|String|	√|	Mô tả lỗi (tiếng Anh hoặc tiếng Việt dựa vào biến "land"|
-|responseTime	|Long|	√|	Thời gian trả kết quả thanh toán về đối tác. Vd: 1625030045458|
+| Attribute    | Type      | Required | Description                                                                              |
+| ------------ | --------- | -------- | ----- |
+| partnerCode  | String    | √        | <a href="#iv-create-account">Thông tin tích hợp</a>                                      |
+| requestId    | String    | √        | Giống với yêu cầu ban đầu                                                                |
+| orderId      | String    | √        | Mã đơn hàng của đối tác                                                                  |
+| extraData    | String    | √        | Thông tin thêm. Mặc định là giá trị mà đơn vị kinh doanh truyền qua ở lệnh captureWallet |
+| amount       | Long      | √        | Số tiền của đơn hàng                                                                     |
+| transId      | Long      | √        | Mã giao dịch của MoMo (duy nhất không trùng - dùng để đối soát 2 bên)                    |
+| payType      | String    | √        | Hình thức thanh toán. web hoặc qr. Mặc định là "" nếu không thanh toán                   |
+| resultCode   | int       | √        | <a href="#result-code">Mã lỗi MoMo »</a>                                                 |
+| refundTrans  | JsonArray | √        | Danh sách các giao dịch hoàn tiền. Các thuốc tính của 1 giao dịch refund                 |
+| message      | String    | √        | Mô tả lỗi (tiếng Anh hoặc tiếng Việt dựa vào biến "land"                                 |
+| responseTime | Long      | √        | Thời gian trả kết quả thanh toán về đối tác. Vd: 1625030045458                           |
 
 * Bảng mô tả nội dung refundTrans
 
-|Attribute	|Type	|Required	|Description|
-|---|---|---|---|
-|orderId	|String|	√	|Mã đơn hàng của đối tác|
-|amount	|Long|	√|	Số tiền của đơn hàng|
-|resultCode	|int|	√|	<a href="#result-code">Mã lỗi MoMo »</a>|
-|transId	|Long|	√|	Mã giao dịch của MoMo (duy nhất không trùng - dùng để đối soát 2 bên)|
-|createdTime	|Long|	√|	Thời gian yêu cầu hoàn tiền. Định dạng: timestamp. Vd: 1625030045458|
+| Attribute   | Type   | Required | Description                                                           |
+| ----------- | ------ | -------- | ---- |
+| orderId     | String | √        | Mã đơn hàng của đối tác                                               |
+| amount      | Long   | √        | Số tiền của đơn hàng                                                  |
+| resultCode  | int    | √        | <a href="#result-code">Mã lỗi MoMo »</a>                              |
+| transId     | Long   | √        | Mã giao dịch của MoMo (duy nhất không trùng - dùng để đối soát 2 bên) |
+| createdTime | Long   | √        | Thời gian yêu cầu hoàn tiền. Định dạng: timestamp. Vd: 1625030045458  |
 
 DATA Example
 <br>
@@ -397,30 +381,30 @@ Prod : https://payment.momo.vn/v2/gateway/api/refund
 ```
 * HTTP Request
 
-|Attribute	|Type	|Required	|Description|
-|---|---|---|---|
-|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
-|orderId	|String|	√|	Mã đơn hàng hoàn tiền là riêng biệt so với mã đơn hàng thanh toán (⚠️Không sử dùng ký tự đặc biệt)|
-|requestId	|String|	√|	Định danh mỗi yêu cầu|
-|amount	|Long|	√|	Số tiền cần được hoàn tiền (< hoặc = tổng tiền đã thanh toán)|
-|transId	|Long|	√|	Mã giao dịch của MoMo (Mã này được MoMo cung cấp sau khi giao dịch thanh toán thành công)|
-|lang	|String|	√|	Ngôn ngữ của message được trả về (vi hoặc en)|
-|description	|String|	|	Mô tả yêu cầu hoàn tiền|
-|signature	|String|	√|	HMAC_SHA256(accessKey=$acessKey&amount=$amount&description=$description&orderId=$orderId&partnerCode=$partnerCode&requestId=$requestId&transId=$transId,secretKey)|
+| Attribute   | Type   | Required | Description                                                                                                                                                        |
+| ----------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| partnerCode | String | √        | <a href="#iv-create-account">Thông tin tích hợp</a>                                                                                                                |
+| orderId     | String | √        | Mã đơn hàng hoàn tiền là riêng biệt so với mã đơn hàng thanh toán (⚠️Không sử dùng ký tự đặc biệt)                                                                  |
+| requestId   | String | √        | Định danh mỗi yêu cầu                                                                                                                                              |
+| amount      | Long   | √        | Số tiền cần được hoàn tiền (< hoặc = tổng tiền đã thanh toán)                                                                                                      |
+| transId     | Long   | √        | Mã giao dịch của MoMo (Mã này được MoMo cung cấp sau khi giao dịch thanh toán thành công)                                                                          |
+| lang        | String | √        | Ngôn ngữ của message được trả về (vi hoặc en)                                                                                                                      |
+| description | String |          | Mô tả yêu cầu hoàn tiền                                                                                                                                            |
+| signature   | String | √        | HMAC_SHA256(accessKey=$acessKey&amount=$amount&description=$description&orderId=$orderId&partnerCode=$partnerCode&requestId=$requestId&transId=$transId,secretKey) |
 
 * HTTP Response
 
-|Attribute	|Type	|Required	|Description|
-|---|---|---|---|
-|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
-|orderId	|String|	√	|Mã đơn hàng của đối tác|
-|requestId	|String|	√|	Giống với yêu cầu ban đầu|
-|extraData	|String|	√	|Thông tin thêm. Mặc định là giá trị mà đơn vị kinh doanh truyền qua ở lệnh captureWallet|
-|amount	|Long|	√|	Số tiền được hoàn|
-|transId	|Long|	√|	Mã giao dịch của MoMo|
-|resultCode	|int|	√|	<a href="#result-code">Mã lỗi MoMo »</a>|
-|message	|String|	√|	Mô tả lỗi (tiếng Anh hoặc tiếng Việt dựa vào biến "land"|
-|responseTime	|Long|	√|	Thời gian trả kết quả thanh toán về đối tác. Vd: 1625030045458|
+| Attribute    | Type   | Required | Description                                                                              |
+| ------------ | ------ | -------- | ---------------------------------------------------------------------------------------- |
+| partnerCode  | String | √        | <a href="#iv-create-account">Thông tin tích hợp</a>                                      |
+| orderId      | String | √        | Mã đơn hàng của đối tác                                                                  |
+| requestId    | String | √        | Giống với yêu cầu ban đầu                                                                |
+| extraData    | String | √        | Thông tin thêm. Mặc định là giá trị mà đơn vị kinh doanh truyền qua ở lệnh captureWallet |
+| amount       | Long   | √        | Số tiền được hoàn                                                                        |
+| transId      | Long   | √        | Mã giao dịch của MoMo                                                                    |
+| resultCode   | int    | √        | <a href="#result-code">Mã lỗi MoMo »</a>                                                 |
+| message      | String | √        | Mô tả lỗi (tiếng Anh hoặc tiếng Việt dựa vào biến "land"                                 |
+| responseTime | Long   | √        | Thời gian trả kết quả thanh toán về đối tác. Vd: 1625030045458                           |
 
 DATA Example
 <br>
@@ -455,32 +439,32 @@ Response Body
 ```
 <h1 id="5">V. Result Code (Bảng mã lỗi của MoMo)</h1>
 
-| ResultCode | Status    | Description  |
-| ---         | ----------- |----------- |
-| 0    | Success |Thành công.|
-| 1000 | Fail |Giao dịch đã khởi tạo.|
-| 1001 | Fail |Mã đối tác sai hoặc không tồn tại.|
-| 1002 | Fail |	Giao dịch không tồn tại.|
-| 1003 | Fail |	Mã đơn hàng đã tồn tại.|
-| 1004 | Fail |	Giao dịch đang chờ xử lý.|
-| 1005 | Fail |	Số tiền thanh toán không hợp lệ.|
-| 1006 | Fail |	Yêu cầu không đúng định dạng.|
-| 1007 | Fail |	Chữ ký không hợp lệ.|
-| 1008 | Fail |	Loại yêu cầu (requestType) sai hoặc không được hỗ trợ với mã đối tác (partnerCode) hiện tại.|
-| 1009 | Fail |	Đối tác chưa được kích hoạt.|
-| 2001 | Fail |	Ví Momo của người dùng chưa liên kết với ngân hàng.|
-| 2005 | Fail |	Phiên đăng nhập người dùng đã hết hạn.|
-| 3001 | Fail |	Ví Momo của người dùng không đủ tiền.|
-| 3002 | Fail |	Vượt quá mức thanh toán mỗi ngày của ví Momo.|
-| 3004 | Fail |	Thanh toán sử dụng nguồn tiền {moneySource} không thành công.|
-| 3006 | Fail |	Phiên xử lý giao dịch đã hết hạn.|
-| 3007 | Fail |	Người dùng huỷ giao dịch.|
-| 3010 | Fail |	Giao dịch thanh toán đã được xử lý.|
-| 4001 | Fail |	Số tiền hoàn vượt quá số tiền đã thanh toán hoặc giao dịch hoàn tiền đã được xử lý.|
-| 4002 | Fail |	Không thể hoàn tiền cho giao dịch này.|
-| 6001 | Fail |	Hệ thống đang bảo trì.|
-| 6999  | Pending |Lỗi hệ thống không xác định.|
-| Mã lỗi lạ  | Pending |Mã lỗi lạ chưa định nghĩa, cần treo giao dịch|
+| ResultCode | Status  | Description                                                                                  |
+| ---------- | ------- | -------------------------------------------------------------------------------------------- |
+| 0          | Success | Thành công.                                                                                  |
+| 1000       | Fail    | Giao dịch đã khởi tạo.                                                                       |
+| 1001       | Fail    | Mã đối tác sai hoặc không tồn tại.                                                           |
+| 1002       | Fail    | Giao dịch không tồn tại.                                                                     |
+| 1003       | Fail    | Mã đơn hàng đã tồn tại.                                                                      |
+| 1004       | Fail    | Giao dịch đang chờ xử lý.                                                                    |
+| 1005       | Fail    | Số tiền thanh toán không hợp lệ.                                                             |
+| 1006       | Fail    | Yêu cầu không đúng định dạng.                                                                |
+| 1007       | Fail    | Chữ ký không hợp lệ.                                                                         |
+| 1008       | Fail    | Loại yêu cầu (requestType) sai hoặc không được hỗ trợ với mã đối tác (partnerCode) hiện tại. |
+| 1009       | Fail    | Đối tác chưa được kích hoạt.                                                                 |
+| 2001       | Fail    | Ví Momo của người dùng chưa liên kết với ngân hàng.                                          |
+| 2005       | Fail    | Phiên đăng nhập người dùng đã hết hạn.                                                       |
+| 3001       | Fail    | Ví Momo của người dùng không đủ tiền.                                                        |
+| 3002       | Fail    | Vượt quá mức thanh toán mỗi ngày của ví Momo.                                                |
+| 3004       | Fail    | Thanh toán sử dụng nguồn tiền {moneySource} không thành công.                                |
+| 3006       | Fail    | Phiên xử lý giao dịch đã hết hạn.                                                            |
+| 3007       | Fail    | Người dùng huỷ giao dịch.                                                                    |
+| 3010       | Fail    | Giao dịch thanh toán đã được xử lý.                                                          |
+| 4001       | Fail    | Số tiền hoàn vượt quá số tiền đã thanh toán hoặc giao dịch hoàn tiền đã được xử lý.          |
+| 4002       | Fail    | Không thể hoàn tiền cho giao dịch này.                                                       |
+| 6001       | Fail    | Hệ thống đang bảo trì.                                                                       |
+| 6999       | Pending | Lỗi hệ thống không xác định.                                                                 |
+| Mã lỗi lạ  | Pending | Mã lỗi lạ chưa định nghĩa, cần treo giao dịch                                                |
 
 <h1 id="6">VI. IPN - Instant Payment Notification</h1>
 
@@ -502,21 +486,21 @@ Merchant ⚠️PHẢI ⚠️PHẢI ⚠️PHẢI sử dụng hệ thống backend
 > <br> Tùy đối tác tạo ipnUrl thế nào cũng được
 * HTTP Request
 
-|Attribute	|Type	|Required	|Description|
-|---|---|---|---|
-|partnerCode	|String|	√|	<a href="#iv-create-account">Thông tin tích hợp</a> |
-|orderId	|String|	√|	Mã đơn hàng của đối tác|
-|requestId	|String|	√|	requestId của đối tác|
-|amount	|Long|	√|	Số tiền thanh toán|
-|orderInfo	|String|	√|	Thông tin đơn hàng|
-|orderType	|String|	√|	momo_wallet|
-|transId	|Long|	√|	Mã giao dịch của MoMo|
-|resultCode	|int|	√|	Trạng thái giao dịch của đơn hàng|
-|message	|String|	√|	Mô tả lỗi dựa trên lang|
-|payType	|String|	√|	Hình thức thanh toán: web or qr|
-|responseTime	|Long|	√|	Thời gian trả kết quả thanh toán về đối tác|
-|extraData	|String|	√|	Thông tin thêm. Mặc định là ""|
-|signature	|String|	√|	Chữ ký để kiểm tra tính đúng đắn của dữ liệu khi truyền tải trên mạng. Sử dụng thuật toán Hmac_SHA256 với data theo định dạng được sort từ a-z :HMAC_SHA256(accessKey=$accessKey&amount=$amount&extraData=$extraData&message=$message&orderId=$orderId&orderInfo=$orderInfo&orderType=$orderType&partnerCode=$partnerCode&payType=$payType&requestId=$requestId&responseTime=$responseTime&resultCode=$resultCode&transId=$transId, secretKey)|
+| Attribute    | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------ | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| partnerCode  | String | √        | <a href="#iv-create-account">Thông tin tích hợp</a>                                                                                                                                                                                                                                                                                                                                                                                            |
+| orderId      | String | √        | Mã đơn hàng của đối tác                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| requestId    | String | √        | requestId của đối tác                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| amount       | Long   | √        | Số tiền thanh toán                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| orderInfo    | String | √        | Thông tin đơn hàng                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| orderType    | String | √        | momo_wallet                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| transId      | Long   | √        | Mã giao dịch của MoMo                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| resultCode   | int    | √        | Trạng thái giao dịch của đơn hàng                                                                                                                                                                                                                                                                                                                                                                                                              |
+| message      | String | √        | Mô tả lỗi dựa trên lang                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| payType      | String | √        | Hình thức thanh toán: web or qr                                                                                                                                                                                                                                                                                                                                                                                                                |
+| responseTime | Long   | √        | Thời gian trả kết quả thanh toán về đối tác                                                                                                                                                                                                                                                                                                                                                                                                    |
+| extraData    | String | √        | Thông tin thêm. Mặc định là ""                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| signature    | String | √        | Chữ ký để kiểm tra tính đúng đắn của dữ liệu khi truyền tải trên mạng. Sử dụng thuật toán Hmac_SHA256 với data theo định dạng được sort từ a-z :HMAC_SHA256(accessKey=$accessKey&amount=$amount&extraData=$extraData&message=$message&orderId=$orderId&orderInfo=$orderInfo&orderType=$orderType&partnerCode=$partnerCode&payType=$payType&requestId=$requestId&responseTime=$responseTime&resultCode=$resultCode&transId=$transId, secretKey) |
 
 DATA Example
 <br>
@@ -561,18 +545,18 @@ Link Install App MoMo Test : https://test-payment.momo.vn/download/
 
 Account Test login App MoMo Test
 
-| STT | Account | OTP | Password |
-| --- | ----------- | ----------- | ----------- |
-| 1 | 0938023111| 000000 | 000000 |
-| 2 | 0938023112| 000000 | 000000 |
-| 3 | 0938023113| 000000 | 111111 |
-| 4 | 0938023114| 000000 | 111111 |
-| 5 | 0938023115| 000000 | 111111 |
-| 6 | 0938023116| 000000 | 000000 |
-| 7 | 0938023117| 000000 | 000000 |
-| 8 | 0938023118| 000000 | 000000 |
-| 9 | 0938023119| 000000 | 000000 |
-| 10 | 0938023110| 000000 | 000000 |
+| STT | Account    | OTP    | Password |
+| --- | ---------- | ------ | -------- |
+| 1   | 0938023111 | 000000 | 000000   |
+| 2   | 0938023112 | 000000 | 000000   |
+| 3   | 0938023113 | 000000 | 111111   |
+| 4   | 0938023114 | 000000 | 111111   |
+| 5   | 0938023115 | 000000 | 111111   |
+| 6   | 0938023116 | 000000 | 000000   |
+| 7   | 0938023117 | 000000 | 000000   |
+| 8   | 0938023118 | 000000 | 000000   |
+| 9   | 0938023119 | 000000 | 000000   |
+| 10  | 0938023110 | 000000 | 000000   |
 
 TEST CASE:
 <br>
