@@ -66,7 +66,7 @@ Nhầm hỗ trợ các đối tác tích hợp các giải pháp thanh toán c�
 ## Sơ đồ xử lý
 Sơ đồ thanh toán đơn hàng trên Website desktop
 <p align="left">
-    <img src="assets/sequence_website.png" alt="flow" width="100%">
+    <img src="assets/sequence_website1.png" alt="flow" width="100%">
 </p>
 
 Thanh toán App-In-App, Website Mobile
