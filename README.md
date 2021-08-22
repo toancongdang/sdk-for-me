@@ -58,7 +58,6 @@ Nhầm hỗ trợ các đối tác tích hợp các giải pháp thanh toán c�
 * Tích hợp nhanh chóng, chính xác, hiệu quả
 * Hạn chế rủi ro trong quá trình tích hợp
 
-
 <!-- GETTING STARTED -->
 ### Lựa chọn giải phápu
 
