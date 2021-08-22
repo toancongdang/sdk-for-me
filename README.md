@@ -78,7 +78,7 @@ Thanh toán App-In-App, Website Mobile
 ## Mô hình thanh toán
 Tham khảo hướng dẫn sau để áp dụng MoMo vào trang mua hàng của bạn
 
-* Bước 1: Khách hàng kiểm tra đơn hàng và chọn MoMo là phương thức thanh toán
+* Bước 1: Khách hàng kiểm tra đơn hàng và chọn MoMo để thanh toán
 * Bước 2: Server của bạn tạo session thanh toán và gửi yêu cầu thanh toán qua MoMo
 * Bước 3: Chuyển trang mua hàng sang trang thanh toán của MoMo.
 * Bước 4: Khách hàng sử dụng ứng dụng MoMo để quét mã QR hoặc đăng nhập app MoMo để thanh toán
