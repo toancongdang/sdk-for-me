@@ -65,14 +65,14 @@ Nhầm hỗ trợ các đối tác tích hợp các giải pháp thanh toán c�
 [AIOv2](https://developers.momo.vn/#/docs/aiov2/) là giải pháp thanh toán của MoMo áp dụng trên nhiều nền tảng khác nhau chỉ trong một API duy nhất.
 
 ## Sơ đồ xử lý
-Sơ đồ thanh toán đơn hàng trên website desktop/mobile
+Sơ đồ thanh toán đơn hàng trên Website desktop
 <p align="left">
-    <img src="assets/flow1.jpeg" alt="flow" width="100%">
+    <img src="assets/sequence_website.png" alt="flow" width="100%">
 </p>
 
-Thanh toán App-In-App
+Thanh toán App-In-App, Website Mobile
 <p align="left">
-    <img src="assets/final_app_in_app.png" alt="flow" width="100%">
+    <img src="assets/sequence_app_in_app.png" alt="flow" width="100%">
 </p>
 
 ## Mô hình thanh toán
