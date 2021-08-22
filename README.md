@@ -70,9 +70,9 @@ Sơ đồ thanh toán đơn hàng trên website desktop/mobile
     <img src="assets/flow1.jpeg" alt="flow" width="100%">
 </p>
 
-Thanh toán trên Smart Tivi
+Thanh toán App-In-App
 <p align="left">
-    <img src="assets/flow1.jpeg" alt="flow" width="100%">
+    <img src="assets/final_app_in_app.png" alt="flow" width="100%">
 </p>
 
 ## Mô hình thanh toán
