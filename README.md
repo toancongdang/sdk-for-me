@@ -105,6 +105,46 @@ Tham khảo hướng dẫn sau để áp dụng MoMo vào trang mua hàng của 
 | 23        | Server MoMo trả kết quả về Server Merchant |
 | 24        | Server Merchant update kết quả của giao dịch trên hệ thống |
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<details><summary>CLICK ME !!! Mô tả các bước thanh toán APP-IN-APP  »</summary>
+<p align="left">
+| Step | Description                       |
+| ----------- | ---------------------------- |
+| 1  	   | User chọn phương thức thanh toán là MoMo |
+| 2        | App Merchant gọi xuống Server Merchant để lấy phương thức thanh toán của MoMo |
+| 3        | Server Merchant gọi api create transaction để khởi tạo deeplink |
+| 4        | Server MoMo trả về kết quả transaction có deeplink |
+| 5        | Server Merchant nhận kết quả transaction có deeplink |
+| 6        | Server Merchant trả kết quả về cho App Merchant |
+| 7        | App Merchant mở deeplink để điều hướng đến thông tin đơn hàng trên App MoMo |
+| 8        | User confirm lại thông tin thanh toán trên App MoMo |
+| 9        | User chọn thanh toán và App MoMo gửi yêu cầu thanh toán đến Server MoMo |
+| 10        | Server MoMo gọi đến IpnUrl mà merchant đã cung cấp để gửi để thông báo kết quả giao dịch ngay lập tức |
+| 11        | Server Merchant trả kết quả của IpnUrl về Server MoMo |
+| 12        | Server Merchant update kết quả của giao dịch trên hệ thống |
+| 13        | Server MoMo trả kết quả thanh toán về App MoMo |
+| 14        | App MoMo redirect URL về mở App Merchant |
+| 15        | Server Merchant get kết quả thanh toán về để kiểm tra |
+| 16        | Trường hợp kết quả thanh toán là thất bại thì tiến hành kiểm tra tại database. Trường hợp kết quả thanh toán là thành công thì bỏ qua bước 17 và 18 |
+| 17        | Server Merchant gọi api confirm transaction để kiểm tra kết quả giao dịch tại MoMo |
+| 18        | Server MoMo trả kết quả giao dịch về Server Merchant |
+| 19        | Server Merchant trả kết quả giao dịch về cho App Merchant |
+| 20        | Server Merchant update kết quả của giao dịch trên hệ thống |
+| 21        | Server Merchant tạo cron job 5 phút gọi đến api confirm transaction của MoMo 1 lần để kiểm tra trạng thái giao dịch trên hệ thống |
+| 22        | Server MoMo trả kết quả về Server Merchant |
+| 23        | Server Merchant update kết quả của giao dịch trên hệ thống |
+</p>
+</details>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <h1 id="2">II. Thông tin chung</h1>
 
