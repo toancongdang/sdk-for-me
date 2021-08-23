@@ -112,6 +112,7 @@ Tham khảo hướng dẫn sau để áp dụng MoMo vào trang mua hàng của 
 <br>
 <details><summary>CLICK ME !!! Mô tả các bước thanh toán APP-IN-APP  »</summary>
 <p align="left">
+
 | Step | Description                       |
 | ----------- | ---------------------------- |
 | 1  	   | User chọn phương thức thanh toán là MoMo |
@@ -137,6 +138,7 @@ Tham khảo hướng dẫn sau để áp dụng MoMo vào trang mua hàng của 
 | 21        | Server Merchant tạo cron job 5 phút gọi đến api confirm transaction của MoMo 1 lần để kiểm tra trạng thái giao dịch trên hệ thống |
 | 22        | Server MoMo trả kết quả về Server Merchant |
 | 23        | Server Merchant update kết quả của giao dịch trên hệ thống |
+
 </p>
 </details>
 <br>
