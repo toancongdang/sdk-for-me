@@ -74,15 +74,37 @@ Thanh toán App-In-App, Website Mobile
     <img src="assets/sequence_app_in_app.png" alt="flow" width="100%">
 </p>
 
-## Mô hình thanh toán
+## Mô tả các bước thanh toán Website desktop
 Tham khảo hướng dẫn sau để áp dụng MoMo vào trang mua hàng của bạn
 
-* Bước 1: Khách hàng kiểm tra đơn hàng và chọn MoMo để thanh toán
-* Bước 2: Server của bạn tạo session thanh toán và gửi yêu cầu thanh toán qua MoMo
-* Bước 3: Chuyển trang mua hàng sang trang thanh toán của MoMo.
-* Bước 4: Khách hàng sử dụng ứng dụng MoMo để quét mã QR hoặc đăng nhập app MoMo để thanh toán
-* Bước 5: Sau khi thanh toán xong MoMo sẽ chuyển khách hàng về trang mua hàng
-* Bước 6: Server của bạn xác thực giao dịch và cập nhật dịch vụ cho khách hàng
+| Step | Description                       |
+| ----------- | ---------------------------- |
+| 1  	   | User chọn phương thức thanh toán là MoMo |
+| 2        | Web Merchant gọi xuống Server Merchant để lấy phương thức thanh toán của MoMo |
+| 3        | Server Merchant gọi api create transaction để khởi tạo payUrl và qrCodeUrl (phải đăng kí với MoMo) |
+| 4        | Server MoMo trả về kết quả transaction có payUrl (trường hợp merchant muốn sử dụng deeplink, qrCodeUrl, deeplinkWebInApp vui lòng đăng ký với MoMo) |
+| 5        | Server Merchant nhận kết quả transaction và chọn hình thức hiển thị QR code tại web Merchant hay web MoMo |
+| 6        | Server Merchant trả kết quả về cho Web Merchant |
+| 7.1        | Tại Web Merchant, nếu merchant chọn hiện QR code tại web merchant thì sử dụng qrCodeUrl để generate tại web merchant, nếu merchant chọn hiện QR code trên web MoMo thì sử dụng payUrl để redirect sang web MoMo |
+| 7.2        | User mở app MoMo và sử dụng camera trên app để quét mã QR code |
+| 8        | Hiển thị thông tin đơn hàng trên app MoMo tương ứng với thông tin trên Web Merchant |
+| 9        | User confirm lại thông tin thanh toán trên app MoMo |
+| 10        | User chọn thanh toán và app MoMo gửi yêu cầu thanh toán đến Server MoMo |
+| 11        | Server MoMo gọi đến IpnUrl mà merchant đã cung cấp để gửi để thông báo kết quả giao dịch ngay lập tức |
+| 12        | Server Merchant trả kết quả của IpnUrl về Server MoMo |
+| 13        | Server Merchant update kết quả của giao dịch trên hệ thống |
+| 14        | Server MoMo trả kết quả thanh toán về App MoMo |
+| 15        | App MoMo redirect URL open Web Merchant|
+| 16        | Web Merchant get kết quả thanh toán về để kiểm tra |
+| 17        | Trường hợp kết quả thanh toán là thất bại thì tiến hành kiểm tra tại database. Trường hợp kết quả thanh toán là thành công thì bỏ qua bước 18 và 19 |
+| 18        | Server Merchant gọi api confirm transaction để kiểm tra kết quả giao dịch tại MoMo |
+| 19        | Server MoMo trả kết quả giao dịch về Server Merchant |
+| 20        | Server Merchant trả kết quả giao dịch về cho Web Merchant |
+| 21        | Server Merchant update kết quả của giao dịch trên hệ thống |
+| 22        | Server Merchant tạo cron job 5 phút gọi đến api confirm transaction của MoMo 1 lần để kiểm tra trạng thái cac giao dịch trên hệ thống |
+| 23        | Server MoMo trả kết quả về Server Merchant |
+| 24        | Server Merchant update kết quả của giao dịch trên hệ thống |
+
 
 <h1 id="2">II. Thông tin chung</h1>
 
