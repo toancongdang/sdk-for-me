@@ -59,7 +59,7 @@ Nhầm hỗ trợ các đối tác tích hợp các giải pháp thanh toán c�
 * Hạn chế rủi ro trong quá trình tích hợp
 
 <!-- GETTING STARTED -->
-### Lựa chọn giải phápu
+### Lựa chọn giải pháp
 
 [AIOv2](https://developers.momo.vn/#/docs/aiov2/) là giải pháp thanh toán của MoMo áp dụng trên nhiều nền tảng khác nhau chỉ trong một API duy nhất.
 
