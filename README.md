@@ -272,7 +272,7 @@ Request Body
   "ipnUrl": "http(s)://domain.partner.vn/ipn/",
   "requestType": "captureWallet",
   "extraData": "eyJ1c2VybmFtZSI6ICJtb21vIn0=",
-  "lang": "vn",
+  "lang": "vi",
   "signature": "3084afbc257bc556d60efbffab14b4358874572a30d9e3ed7676b9d96dd27c91"
 }
 ```
