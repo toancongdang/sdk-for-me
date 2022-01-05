@@ -222,7 +222,7 @@ Prod : https://payment.momo.vn/v2/gateway/api/create
 | ----------- | ------ | -------- | -------------|
 | partnerCode | String | √        | <a href="#iv-create-account">Thông tin tích hợp</a>  | partnerName | String |          | Tên đối tác                                                                                                                                                                                                                                                                                                                                                                                                           |
 | storeId     | String |          | Thông tin cửa hàng                                                                                                                                                                                                                                                                                                                                                                                                    |
-| requestId   | String | √        | Định danh mỗi yêu cầu                                                                                                                                                                                                                                                                                                                                                                                                 |
+| requestId   | String(50) | √        | Định danh mỗi yêu cầu                                                                                                                                                                                                                                                                                                                                                                                                 |
 | amount      | LONG ONLY LONG   | √        | Số tiền cần thanh toán. tối thiểu 1.000 VND tối đa 20.000.000 VND. Tiền tệ: VND. (⚠️Muốn vượt 20tr cần liên hệ MoMo). Kiểu LONG nha (Rất nhiều đối tác nhầm chỗ này)                                                                                                                                                                                                                                                                                                  |
 | orderId     | String | √        | Mã đơn hàng thanh toán của đối tác (duy nhất không trùng lập) (⚠️Không sử dùng ký tự đặc biệt)                                                                                                                                                                                                                                                                                                                         |
 | orderInfo   | String | √        | Thông tin đơn hàng mô tả                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -501,33 +501,8 @@ Response Body
 }
 ```
 <h1 id="5">V. Result Code (Bảng mã lỗi của MoMo)</h1>
+https://developers.momo.vn/v3/docs/payment/api/result-handling/resultcode     
 
-| ResultCode | Status  | Description                                                                                  |
-| ---------- | ------- | -------------------------------------------------------------------------------------------- |
-| 0          | Success | Thành công.                                                                                  |
-| 1000       | Fail    | Giao dịch đã khởi tạo.                                                                       |
-| 1001       | Fail    | Mã đối tác sai hoặc không tồn tại.                                                           |
-| 1002       | Fail    | Giao dịch không tồn tại.                                                                     |
-| 1003       | Fail    | Mã đơn hàng đã tồn tại.                                                                      |
-| 1004       | Fail    | Vượt hạn mức giao dịch cho phép.                                                                 |
-| 1005       | Fail    | Số tiền thanh toán không hợp lệ.                                                             |
-| 1006       | Fail    | Yêu cầu không đúng định dạng.                                                                |
-| 1007       | Fail    | Chữ ký không hợp lệ.                                                                         |
-| 1008       | Fail    | Loại yêu cầu (requestType) sai hoặc không được hỗ trợ với mã đối tác (partnerCode) hiện tại. |
-| 1009       | Fail    | Đối tác chưa được kích hoạt.                                                                 |
-| 2001       | Fail    | Ví Momo của người dùng chưa liên kết với ngân hàng.                                          |
-| 2005       | Fail    | Phiên đăng nhập người dùng đã hết hạn.                                                       |
-| 3001       | Fail    | Ví Momo của người dùng không đủ tiền.                                                        |
-| 3002       | Fail    | Vượt quá mức thanh toán mỗi ngày của ví Momo.                                                |
-| 3004       | Fail    | Thanh toán sử dụng nguồn tiền {moneySource} không thành công.                                |
-| 3006       | Fail    | Phiên xử lý giao dịch đã hết hạn.                                                            |
-| 3007       | Fail    | Người dùng huỷ giao dịch.                                                                    |
-| 3010       | Fail    | Giao dịch thanh toán đã được xử lý.                                                          |
-| 4001       | Fail    | Số tiền hoàn vượt quá số tiền đã thanh toán hoặc giao dịch hoàn tiền đã được xử lý.          |
-| 4002       | Fail    | Không thể hoàn tiền cho giao dịch này.                                                       |
-| 6001       | Fail    | Hệ thống đang bảo trì.                                                                       |
-| 6999       | Pending | Lỗi hệ thống không xác định.                                                                 |
-| Mã lỗi lạ  | Pending | Mã lỗi lạ chưa định nghĩa, cần treo giao dịch                                                |
 
 <h1 id="6">VI. IPN - Instant Payment Notification</h1>
 
@@ -634,8 +609,11 @@ https://docs.google.com/spreadsheets/d/1Ixv6wiHag8qXXcOs4PoNuPtK5XgFEz54jkrDLwaU
 APP TO APP
 https://docs.google.com/spreadsheets/d/1puLVoJ28-q_N0-IE0lkGMkstVyDuqrBweDhrlA7bAfQ/edit#gid=431788022
 
+Đối tác thực hiện test theo test case tương ứng, sau đó sẽ gửi test case đến nhân viên MOMO để verify.
 
-
+Hoàn thành nghiệm thu môi trường test
+ 
+MOMO sẽ process tạo tài khoản Prod gửi đối tác (khoảng 7 ngày) nếu không có bất kỳ vấn đề gì về hợp đồng và pháp lý
 
 <br><br><br><br><br><br><br><br><br>
 THE END
