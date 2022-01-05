@@ -623,9 +623,16 @@ Account Test login App MoMo Test
 
 TEST CASE:
 <br>
-https://developers.momo.vn/docs/test/MoMo-Online-Payment-Testcase-vi-v1.1.pdf
 
 
+WEB TO APP
+https://docs.google.com/spreadsheets/d/1Uf6SvrDxrdyPJpPkQHyVsy1-Olsmn1ZCnEowFTIfr8o/edit#gid=1927148219
+
+QRCODE ĐỘNG
+https://docs.google.com/spreadsheets/d/1Ixv6wiHag8qXXcOs4PoNuPtK5XgFEz54jkrDLwaUVx4/edit#gid=1764326656
+
+APP TO APP
+https://docs.google.com/spreadsheets/d/1puLVoJ28-q_N0-IE0lkGMkstVyDuqrBweDhrlA7bAfQ/edit#gid=431788022
 
 
 
